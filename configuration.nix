@@ -35,6 +35,12 @@
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
   boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\""];
 
+  # Configure how the system sleeps when the lid is closed;
+  # this seems to not influence suspend behavior when the
+  # laptop is connected to a dock-based power source
+  services.logind.lidSwitch = "suspend";
+  services.logind.lidSwitchExternalPower = "suspend";
+
   # Define the hostname
   networking.hostName = "diameno";
 
