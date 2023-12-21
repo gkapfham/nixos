@@ -167,9 +167,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # programs.zsh.enable = true;
-
   # Define a user account; password already created with passwd
+  # Add the user's packages in separate sections with each
+  # section organized in increasing alphabetical order
   users.users.gkapfham = {
     isNormalUser = true;
     description = "Gregory M. Kapfhammer";
@@ -226,11 +226,6 @@
       pass
       # theme
       fluent-gtk-theme
-      nordic
-      layan-gtk-theme
-      numix-gtk-theme
-      numix-sx-gtk-theme
-      omni-gtk-theme
       # utilities
       atuin
       fasd
