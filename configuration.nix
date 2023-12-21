@@ -194,8 +194,9 @@
       # browsers
       brave
       chromium
-      firefox
       discord
+      firefox
+      w3m
       # desktop
       clipmenu
       dmenu
@@ -259,6 +260,11 @@
   # List packages installed in system profile
   environment.systemPackages = with pkgs;
    [
+    # tools and libraries
+    aspell
+    aspellDicts.en
+    aspellDicts.en-computers
+    aspellDicts.en-science
     bibtool
     curl
     easyeffects
@@ -291,7 +297,6 @@
     phinger-cursors
     picom-allusive
     pinentry-gtk2
-    pinentry-gnome
     rng-tools
     sct
     sshfs
