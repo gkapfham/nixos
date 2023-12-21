@@ -256,7 +256,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfreePredicate = _: true;
 
-  # List packages installed in system profile. To search, run:
+  # List packages installed in system profile
   environment.systemPackages = with pkgs;
    [
     bibtool
