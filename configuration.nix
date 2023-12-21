@@ -92,7 +92,12 @@
   services.xserver.displayManager.defaultSession = "none+i3";
   services.xserver.windowManager.i3.enable = true;
 
-  # Configure the display manager
+  # Configure the display manager;
+  # note that this assumes that the wallpaper.jpg
+  # file was manually moved to this location.
+  # Overall, it seems as though there is no other way
+  # to reference a wallpaper in a user account or to
+  # preload the wallpaper to the /etc/lightdm directory
   services.xserver.displayManager.lightdm.greeters.mini = {
             enable = true;
             user = "gkapfham";
