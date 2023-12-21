@@ -130,7 +130,9 @@
     xkbVariant = "";
   };
 
-  # Fonts
+  # Install fonts; note that this ensures the Nerd fonts
+  # with all of their affiliated symbols are applied
+  # to the fonts that are installed from Nix packages
   fonts.packages = with pkgs; [
     hack-font
     roboto-mono
@@ -140,8 +142,7 @@
   # Enable support for Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
-  #services.blueman.enable = true;
-  
+
   # Enable CUPS to print documents
   services.printing.enable = true;
 
