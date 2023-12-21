@@ -337,27 +337,29 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
+  # Expose binaries in the Nix store
   environment.pathsToLink = [ "/libexec" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
 
+  # Define the GNU gpg agent for the use
+  # of programs like pass; make sure that
+  # there is a pineentryFlavor defined so
+  # that it is possible to enter passwords
+  # when running programs like neomutt
   programs.gnupg.agent = {
     enable = true;
     pinentryFlavor = "gnome3";
   };
 
-  # List services that you want to enable:
-
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.lightdm.enableGnomeKeyring = true;
-
-  # Ssh agent
+  # Enable the ssh agent
   programs.ssh.startAgent = true;
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  # Enable the Gnome keyring
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.lightdm.enableGnomeKeyring = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
