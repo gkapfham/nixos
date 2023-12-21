@@ -292,7 +292,6 @@
     pavucontrol
     phinger-cursors
     picom-allusive
-    # picom-next
     pinentry-gtk2
     rng-tools
     sct
