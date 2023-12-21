@@ -121,7 +121,9 @@
             '';
         };
 
-  # Use light from controlling backlight
+  # Use light from controlling backlight; see
+  # the i3 configuration for more details on
+  # how to use command with the i3 window manager
   programs.light.enable = true;
 
   # Configure keymap in X11
@@ -157,7 +159,6 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
