@@ -109,12 +109,12 @@
                 [greeter-theme]
                 font-size = 1.1em
                 window-color = "#d78700"
-                background-image = "/etc/lightdm/wallpaper.jpg"
-                background-color = "#1c1c1c"
+                background-image = ""
+                background-color = "#875f87"
                 border-color = "#080800"
                 border-width = 2px
                 layout-space = 15
-                password-color = "#767676"
+                password-color = "#a8a8a8"
                 password-background-color = "#1B1D1E"
                 password-border-color = "#080800"
                 password-border-width = 2px
@@ -296,6 +296,7 @@
     pavucontrol
     phinger-cursors
     picom-allusive
+    # picom-next
     pinentry-gtk2
     rng-tools
     sct
