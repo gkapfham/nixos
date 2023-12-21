@@ -255,6 +255,7 @@
     gcc
     gnumake
     linuxKernel.packages.linux_zen.cpupower
+    libsecret
     lm_sensors
     lxappearance
     killall
@@ -280,6 +281,8 @@
     pavucontrol
     phinger-cursors
     picom-allusive
+    pinentry-gtk2
+    pinentry-gnome
     rng-tools
     sct
     sshfs
@@ -330,11 +333,10 @@
   # started in user sessions.
   # programs.mtr.enable = true;
 
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  #   pinentryFlavor = "gtk2";
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "gnome3";
+  };
 
   # List services that you want to enable:
 
