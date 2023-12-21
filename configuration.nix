@@ -265,7 +265,6 @@
     gcc
     gnumake
     linuxKernel.packages.linux_zen.cpupower
-    libsecret
     lm_sensors
     lxappearance
     killall
