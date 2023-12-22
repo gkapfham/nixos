@@ -36,10 +36,13 @@
   boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\""];
 
   # Configure how the system sleeps when the lid is closed;
-  # this seems to not influence suspend behavior when the
-  # laptop is connected to a dock-based power source
+  # specifically, it should sleep or suspend in all cases
+  # --> when running on battery power
+  # --> when connected to external power
+  # --> when connected to a dock that has external power
   services.logind.lidSwitch = "suspend";
   services.logind.lidSwitchExternalPower = "suspend";
+  services.logind.lidSwitchDocked = "suspend";
 
   # Define the hostname
   networking.hostName = "diameno";
