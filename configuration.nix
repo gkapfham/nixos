@@ -324,6 +324,7 @@
     prettierd
     python3
     python311Packages.pip
+    python311Packages.pydocstyle
     lua-language-server
     nodePackages.pyright
     ruff-lsp
