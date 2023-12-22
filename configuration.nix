@@ -168,8 +168,8 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account; password already created with passwd
-  # Add the user's packages in separate sections with each
-  # section organized in increasing alphabetical order
+  # User Packages: add the user's packages in separate sections
+  # with each section organized in increasing alphabetical order
   users.users.gkapfham = {
     isNormalUser = true;
     description = "Gregory M. Kapfhammer";
@@ -254,6 +254,8 @@
   nixpkgs.config.allowUnfreePredicate = _: true;
 
   # List packages installed in system profile
+  # System Packages: install programs that are
+  # available to all uses on the laptop
   environment.systemPackages = with pkgs;
    [
     # tools and libraries
@@ -292,7 +294,8 @@
     pavucontrol
     phinger-cursors
     picom-allusive
-    pinentry-gtk2
+    pinentry-gnome
+    pulseaudioFull
     rng-tools
     sct
     sshfs
@@ -318,6 +321,7 @@
     nodejs_21
     marksman
     pipx
+    prettierd
     python3
     python311Packages.pip
     lua-language-server
