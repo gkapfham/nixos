@@ -244,8 +244,8 @@
       unzip
       urlview
       vlc
-      zoxide
       zathura
+      zoxide
     ];
   };
 
