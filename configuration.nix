@@ -269,6 +269,7 @@
     aspellDicts.en-science
     bibtool
     curl
+    du-dust
     easyeffects
     gcc
     gnumake
