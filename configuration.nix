@@ -195,6 +195,7 @@
       ripgrep-all
       rtx
       tmuxinator
+      yazi
       # browsers
       brave
       chromium
@@ -298,6 +299,7 @@
     phinger-cursors
     picom-allusive
     pinentry-gnome
+    poppler
     pulseaudioFull
     rng-tools
     sct
@@ -306,6 +308,7 @@
     themechanger
     tmux
     tree
+    unar
     wget
     xclip
     xcape
