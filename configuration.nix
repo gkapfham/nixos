@@ -263,6 +263,7 @@
   environment.systemPackages = with pkgs;
    [
     # tools and libraries
+    acpi
     aspell
     aspellDicts.en
     aspellDicts.en-computers
