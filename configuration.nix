@@ -168,7 +168,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true;
 
   # Define a user account; password already created with passwd
   # User Packages: add the user's packages in separate sections
@@ -274,10 +274,11 @@
     easyeffects
     gcc
     gnumake
+    killall
+    libinput-gestures
     linuxKernel.packages.linux_zen.cpupower
     lm_sensors
     lxappearance
-    killall
     i3
     i3lock-fancy-rapid
     iw
@@ -312,6 +313,7 @@
     tree
     unar
     wget
+    wmctrl
     xclip
     xcape
     xdotool
