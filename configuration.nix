@@ -176,7 +176,7 @@
   users.users.gkapfham = {
     isNormalUser = true;
     description = "Gregory M. Kapfhammer";
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "input" ];
     packages = with pkgs; [
       # terminal
       alacritty
