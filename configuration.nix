@@ -307,6 +307,7 @@
     rng-tools
     sct
     sshfs
+    texlab
     texlive.combined.scheme-full
     themechanger
     tmux
