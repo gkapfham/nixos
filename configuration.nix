@@ -315,6 +315,7 @@
     unar
     wget
     wmctrl
+    wordnet
     xclip
     xcape
     xdotool
@@ -330,13 +331,15 @@
     # programming
     lua5_3_compat
     nodejs_21
-    marksman
     pipx
     prettierd
     python3
     python311Packages.pip
     python311Packages.pydocstyle
+    quarto
+    # language servers
     lua-language-server
+    marksman
     nodePackages.pyright
     ruff-lsp
     vscode-langservers-extracted
