@@ -33,7 +33,7 @@
   });
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
-  boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\""];
+  boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" ];
 
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
