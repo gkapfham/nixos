@@ -119,7 +119,7 @@
                 layout-space = 15
                 password-color = "#a8a8a8"
                 password-background-color = "#1B1D1E"
-                password-border-color = "#080800"
+                password-border-color = "#d78700"
                 password-border-width = 2px
             '';
         };
