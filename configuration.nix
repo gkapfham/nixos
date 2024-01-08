@@ -183,6 +183,7 @@
       gnome.gnome-terminal
       kitty
       # cli
+      abook
       bat
       cloc
       croc
