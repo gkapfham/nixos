@@ -400,10 +400,6 @@
   # Expose binaries in the Nix store
   environment.pathsToLink = [ "/libexec" ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-
   # Define the GNU gpg agent for the use
   # of programs like pass; make sure that
   # there is a pineentryFlavor defined so
