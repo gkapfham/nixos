@@ -387,6 +387,8 @@
     zsh
     zsh-autocomplete
     # programming
+    cargo
+    go
     lua5_3_compat
     nodejs_21
     pipx
@@ -395,6 +397,8 @@
     python311Packages.pip
     python311Packages.pydocstyle
     quarto
+    rustc
+    zulu
     # language servers
     lua-language-server
     marksman
