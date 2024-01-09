@@ -388,6 +388,7 @@
     zsh-autocomplete
     # programming
     cargo
+    devbox
     go
     lua5_3_compat
     nodejs_21
