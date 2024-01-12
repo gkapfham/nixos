@@ -393,6 +393,7 @@
     lua5_3_compat
     nodejs_21
     pipx
+    poetry
     prettierd
     python3
     python311Packages.pip
