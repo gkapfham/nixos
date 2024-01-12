@@ -355,6 +355,7 @@
     killall
     libnotify
     lightdm-mini-greeter
+    nix-search-cli
     numlockx
     pavucontrol
     phinger-cursors
