@@ -388,7 +388,7 @@
     zsh-autocomplete
     # programming
     cargo
-    devbox
+    (import (fetchTarball https://install.devenv.sh/latest)).default
     go
     lua5_3_compat
     nodejs_21
