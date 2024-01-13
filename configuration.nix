@@ -363,6 +363,7 @@
     pinentry-gnome
     poppler
     pulseaudioFull
+    rclone
     rng-tools
     sct
     sshfs
