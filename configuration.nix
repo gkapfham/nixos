@@ -19,23 +19,23 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Linux kernel; latest kernel is currently not sufficient
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Linux kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Define a custom linux kernel for support of AMD Ryzen 7040 CPU
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_6.override {
-    argsOverride = rec {
-      src = pkgs.fetchurl {
-            url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
-            sha256 = "sha256-DOaOxgGQGRQAQyY1IJVezQSDnlWhuqsvqRVbQrtv2EE";
-      };
-      version = "6.6.7";
-      modDirVersion = "6.6.7";
-      };
-  });
+  # # Define a custom linux kernel for support of AMD Ryzen 7040 CPU
+  # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_6.override {
+  #   argsOverride = rec {
+  #     src = pkgs.fetchurl {
+  #           url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
+  #           sha256 = "sha256-DOaOxgGQGRQAQyY1IJVezQSDnlWhuqsvqRVbQrtv2EE";
+  #     };
+  #     version = "6.6.7";
+  #     modDirVersion = "6.6.7";
+  #     };
+  # });
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
-  boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" ];
+  boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0"];
 
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
@@ -85,36 +85,35 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enhanced power management with power-profiles-daemon
-  # Reference: https://github.com/tlvince/nixos-config
-  nixpkgs.overlays = [
-    (
-      final: prev: {
-        power-profiles-daemon = prev.power-profiles-daemon.overrideAttrs (
-          old: {
-            version = "0.13-1";
-
-            patches =
-              (old.patches or [])
-              ++ [
-                (prev.fetchpatch {
-                  url = "https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/merge_requests/127.patch";
-                  sha256 = "sha256-k5c2Gy2r/my3Uc9rBVdnQqr5Fe/QBPcvLLuF8mI8zmA=";
-                })
-              ];
-            # Explicitly fetching the source to make sure we're patching over 0.13 (this isn't strictly needed):
-            src = prev.fetchFromGitLab {
-              domain = "gitlab.freedesktop.org";
-              owner = "upower";
-              repo = "power-profiles-daemon";
-              rev = "0.13";
-              sha256 = "sha256-ErHy+shxZQ/aCryGhovmJ6KmAMt9OZeQGDbHIkC0vUE=";
-            };
-          }
-        );
-      }
-    )
-  ];
+  # # Enhanced power management with power-profiles-daemon
+  # # Reference: https://github.com/tlvince/nixos-config
+  # nixpkgs.overlays = [
+  #   (
+  #     final: prev: {
+  #       power-profiles-daemon = prev.power-profiles-daemon.overrideAttrs (
+  #         old: {
+  #           version = "0.13-1";
+  #           patches =
+  #             (old.patches or [])
+  #             ++ [
+  #               (prev.fetchpatch {
+  #                 url = "https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/merge_requests/127.patch";
+  #                 sha256 = "sha256-k5c2Gy2r/my3Uc9rBVdnQqr5Fe/QBPcvLLuF8mI8zmA=";
+  #               })
+  #             ];
+  #           # Explicitly fetching the source to make sure we're patching over 0.13 (this isn't strictly needed):
+  #           src = prev.fetchFromGitLab {
+  #             domain = "gitlab.freedesktop.org";
+  #             owner = "upower";
+  #             repo = "power-profiles-daemon";
+  #             rev = "0.13";
+  #             sha256 = "sha256-ErHy+shxZQ/aCryGhovmJ6KmAMt9OZeQGDbHIkC0vUE=";
+  #           };
+  #         }
+  #       );
+  #     }
+  #   )
+  # ];
 
   # Enable the X11 windowing system
   services.xserver.enable = true;
@@ -355,6 +354,8 @@
     killall
     libnotify
     lightdm-mini-greeter
+    litemdview
+    mdcat
     nix-search-cli
     numlockx
     pavucontrol
