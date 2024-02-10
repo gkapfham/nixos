@@ -398,9 +398,26 @@
     pipx
     poetry
     prettierd
-    python3
-    python311Packages.pip
-    python311Packages.pydocstyle
+    (python311.withPackages (ps: with ps; [
+      bibtexparser
+      csscompressor
+      htmlmin
+      pyyaml
+      rich
+      rjsmin
+      jupyter-client
+      jupyterlab
+      jupyterlab-git
+      pip
+      pydocstyle
+      pynvim
+      quarto
+    ]))
+    # python3
+    # python311Packages.jupyter-client
+    # python311Packages.pip
+    # python311Packages.pydocstyle
+    # python311Packages.pynvim
     quarto
     rustc
     zulu
