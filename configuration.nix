@@ -332,6 +332,7 @@
     gcc
     gnumake
     killall
+    lazygit
     libinput-gestures
     linuxKernel.packages.linux_zen.cpupower
     lm_sensors
