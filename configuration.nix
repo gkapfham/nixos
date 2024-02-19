@@ -304,6 +304,8 @@
       vlc
       zathura
       zoxide
+      # llms
+      ollama
     ];
   };
 
