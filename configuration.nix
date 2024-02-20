@@ -412,8 +412,11 @@
       jupyterlab
       jupyterlab-git
       pip
+      prompt-toolkit
       pydocstyle
       pynvim
+      python-dotenv
+      requests
       quarto
     ]))
     # python3
