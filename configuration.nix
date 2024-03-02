@@ -257,6 +257,7 @@
       chromium
       discord
       firefox
+      qutebrowser
       w3m
       # desktop
       clipmenu
@@ -468,7 +469,7 @@
 
   # Configure automatic garbage collection for NixOS state
   nix.gc = {
-    automatic = true;
+    automatic = false;
     dates = "weekly";
     options = "--delete-older-than 30d";
     randomizedDelaySec = "1 hour";
