@@ -85,36 +85,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # # Enhanced power management with power-profiles-daemon
-  # # Reference: https://github.com/tlvince/nixos-config
-  # nixpkgs.overlays = [
-  #   (
-  #     final: prev: {
-  #       power-profiles-daemon = prev.power-profiles-daemon.overrideAttrs (
-  #         old: {
-  #           version = "0.13-1";
-  #           patches =
-  #             (old.patches or [])
-  #             ++ [
-  #               (prev.fetchpatch {
-  #                 url = "https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/merge_requests/127.patch";
-  #                 sha256 = "sha256-k5c2Gy2r/my3Uc9rBVdnQqr5Fe/QBPcvLLuF8mI8zmA=";
-  #               })
-  #             ];
-  #           # Explicitly fetching the source to make sure we're patching over 0.13 (this isn't strictly needed):
-  #           src = prev.fetchFromGitLab {
-  #             domain = "gitlab.freedesktop.org";
-  #             owner = "upower";
-  #             repo = "power-profiles-daemon";
-  #             rev = "0.13";
-  #             sha256 = "sha256-ErHy+shxZQ/aCryGhovmJ6KmAMt9OZeQGDbHIkC0vUE=";
-  #           };
-  #         }
-  #       );
-  #     }
-  #   )
-  # ];
-
   # Enable the X11 windowing system
   services.xserver.enable = true;
 
