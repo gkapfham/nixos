@@ -22,18 +22,6 @@
   # Linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # # Define a custom linux kernel for support of AMD Ryzen 7040 CPU
-  # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_6.override {
-  #   argsOverride = rec {
-  #     src = pkgs.fetchurl {
-  #           url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
-  #           sha256 = "sha256-DOaOxgGQGRQAQyY1IJVezQSDnlWhuqsvqRVbQrtv2EE";
-  #     };
-  #     version = "6.6.7";
-  #     modDirVersion = "6.6.7";
-  #     };
-  # });
-
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
   boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0"];
 
