@@ -409,10 +409,6 @@
     yaml-language-server
 ];
 
-# mkShell {
-#   LD_LIBRARY_PATH = "${stdenv.cc.cc.lib}/lib";
-# }
-
   # Enable update of the firmware through Linux
   services.fwupd.enable = true;
 
