@@ -303,6 +303,7 @@
     du-dust
     easyeffects
     gcc
+    gcc-unwrapped
     gnumake
     killall
     lazygit
@@ -376,19 +377,20 @@
       bibtexparser
       csscompressor
       htmlmin
-      pyyaml
-      rich
-      rjsmin
       jupyter-client
       jupyterlab
       jupyterlab-git
+      pillow
       pip
       prompt-toolkit
       pydocstyle
       pynvim
       python-dotenv
+      pyyaml
       requests
       quarto
+      rich
+      rjsmin
     ]))
     # python3
     # python311Packages.jupyter-client
@@ -406,6 +408,10 @@
     vscode-langservers-extracted
     yaml-language-server
 ];
+
+# mkShell {
+#   LD_LIBRARY_PATH = "${stdenv.cc.cc.lib}/lib";
+# }
 
   # Enable update of the firmware through Linux
   services.fwupd.enable = true;
