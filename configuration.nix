@@ -203,6 +203,7 @@
       eva
       eza
       fzf
+      imagemagick
       lesspipe
       neofetch
       ripgrep
@@ -282,6 +283,7 @@
    [
     # tools and libraries
     acpi
+    arandr
     aspell
     aspellDicts.en
     aspellDicts.en-computers
