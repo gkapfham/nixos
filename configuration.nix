@@ -382,11 +382,6 @@
       rich
       rjsmin
     ]))
-    # python3
-    # python311Packages.jupyter-client
-    # python311Packages.pip
-    # python311Packages.pydocstyle
-    # python311Packages.pynvim
     quarto
     rustc
     zulu
