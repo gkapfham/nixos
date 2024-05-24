@@ -231,6 +231,7 @@
       xbanish
       xbindkeys
       # development
+      ast-grep
       ruff
       # editors
       neovim
