@@ -11,5 +11,9 @@ in
     # Neovim; note that the most recent version is
     # only available through the unstable channel
     (import (fetchTarball "channel:nixos-unstable") {}).neovim
+    (import (fetchTarball "channel:nixos-unstable") {}).tree-sitter
+    (import (fetchTarball "channel:nixos-unstable") {}).vim
+    (import (fetchTarball "channel:nixos-unstable") {}).vimPlugins.nvim-treesitter-parsers.latex
+    (import (fetchTarball "channel:nixos-unstable") {}).vimPlugins.nvim-treesitter.withAllGrammars
   ];
 }
