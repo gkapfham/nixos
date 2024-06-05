@@ -231,11 +231,7 @@
       ast-grep
       ruff
       # editors
-      # neovim
       universal-ctags
-      vim
-      vimPlugins.nvim-treesitter-parsers.latex
-      vimPlugins.nvim-treesitter.withAllGrammars
       # mail
       gettext
       isync
@@ -322,6 +318,7 @@
     litemdview
     mdcat
     nix-search-cli
+    nix-tree
     numlockx
     pavucontrol
     phinger-cursors
