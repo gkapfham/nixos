@@ -13,6 +13,8 @@
       <nixos-hardware/framework/13-inch/7040-amd>
       # Include the results of the hardware scan
       ./hardware-configuration.nix
+      # Include the unstable packages from unstable channel
+      ./unstable.nix
     ];
 
   # Bootloader
@@ -234,9 +236,11 @@
       ast-grep
       ruff
       # editors
-      neovim
+      # neovim
       universal-ctags
       vim
+      vimPlugins.nvim-treesitter-parsers.latex
+      vimPlugins.nvim-treesitter.withAllGrammars
       # mail
       gettext
       isync
