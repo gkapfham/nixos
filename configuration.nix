@@ -177,7 +177,7 @@
     pulse.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
+  # Enable touchpad support (enabled default in most desktopManager)
   services.xserver.libinput.enable = true;
 
   # Define a user account; password already created with passwd
