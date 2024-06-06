@@ -13,7 +13,5 @@ in
     (import (fetchTarball "channel:nixos-unstable") {}).neovim
     (import (fetchTarball "channel:nixos-unstable") {}).tree-sitter
     (import (fetchTarball "channel:nixos-unstable") {}).vim
-    (import (fetchTarball "channel:nixos-unstable") {}).vimPlugins.nvim-treesitter-parsers.latex
-    (import (fetchTarball "channel:nixos-unstable") {}).vimPlugins.nvim-treesitter.withAllGrammars
   ];
 }
