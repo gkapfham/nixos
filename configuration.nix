@@ -92,7 +92,6 @@
   services.xserver.displayManager.gdm.enable = false;
 
   # Enable i3
-  # services.xserver.displayManager.defaultSession = "none+i3";
   services.displayManager.defaultSession = "none+i3";
   services.xserver.windowManager.i3.enable = true;
 
@@ -148,7 +147,6 @@
   # Configure keymap in X11
   services.xserver = {
     xkb.layout = "us";
-    # xkbVariant = "";
     xkb.variant = "";
   };
 
