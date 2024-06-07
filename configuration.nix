@@ -92,7 +92,8 @@
   services.xserver.displayManager.gdm.enable = false;
 
   # Enable i3
-  services.xserver.displayManager.defaultSession = "none+i3";
+  # services.xserver.displayManager.defaultSession = "none+i3";
+  services.displayManager.defaultSession = "none+i3";
   services.xserver.windowManager.i3.enable = true;
 
   # Configure the display manager; note that this displays
@@ -146,7 +147,7 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
+    xkb.layout = "us";
     # xkbVariant = "";
     xkb.variant = "";
   };
@@ -179,7 +180,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager)
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Define a user account; password already created with passwd
   # User Packages: add the user's packages in separate sections
