@@ -1,4 +1,9 @@
-# NixOS configuration for unstable packages
+# NixOS configuration for unstable packages;
+# this is only used since there are certain
+# programs, most notably neovim, that are not
+# available at their latest version in the
+# stable channel, thus prompting the limited
+# use of the unstable channel
 
 { config, pkgs, ... }:
 
