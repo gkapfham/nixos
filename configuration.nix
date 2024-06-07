@@ -147,7 +147,8 @@
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
-    xkbVariant = "";
+    # xkbVariant = "";
+    xkb.variant = "";
   };
 
   # Install fonts; note that this ensures the Nerd fonts
@@ -256,7 +257,8 @@
       stow
       stress-ng
       unzip
-      urlview
+      # urlview
+      urlscan
       vlc
       zathura
       zoxide
@@ -322,8 +324,9 @@
     numlockx
     pavucontrol
     phinger-cursors
-    picom-allusive
-    pinentry-gnome
+    picom
+    # picom-allusive
+    # pinentry-gnome
     poppler
     pulseaudioFull
     rclone
@@ -356,12 +359,13 @@
     (import (fetchTarball https://install.devenv.sh/latest)).default
     go
     lua5_3_compat
-    nodejs_21
+    nodejs_22
     pipx
     poetry
     prettierd
     (python311.withPackages (ps: with ps; [
       bibtexparser
+      cairosvg
       csscompressor
       htmlmin
       jupyter-client
@@ -369,9 +373,12 @@
       jupyterlab-git
       pillow
       pip
+      plotly
+      pnglatex
       prompt-toolkit
       pydocstyle
       pynvim
+      pyperclip
       python-dotenv
       pyyaml
       requests
@@ -383,10 +390,12 @@
     rustc
     zulu
     # language servers
+    gopls
     lua-language-server
     marksman
     nodePackages.pyright
     ruff-lsp
+    statix
     vscode-langservers-extracted
     yaml-language-server
 ];
@@ -411,7 +420,8 @@
   # when running programs like neomutt
   programs.gnupg.agent = {
     enable = true;
-    pinentryFlavor = "gnome3";
+    # pinentryFlavor = "gnome3";
+    pinentryPackage = pkgs.pinentry-gnome3;
   };
 
   # Enable the ssh agent
