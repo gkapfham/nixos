@@ -328,6 +328,7 @@
     # pinentry-gnome
     poppler
     pulseaudioFull
+    pstree
     rclone
     rng-tools
     sct
