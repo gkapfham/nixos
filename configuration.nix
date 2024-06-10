@@ -325,7 +325,6 @@
     pavucontrol
     phinger-cursors
     picom
-    # pinentry-gnome
     poppler
     pulseaudioFull
     pstree
