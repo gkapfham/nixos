@@ -162,6 +162,7 @@
   # Enable support for Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
 
   # Enable CUPS to print documents
   services.printing.enable = true;
