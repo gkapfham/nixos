@@ -5,6 +5,12 @@
 # stable channel, thus prompting the limited
 # use of the unstable channel
 
+# Note that this file assumes that the following command
+# has already been run to add the unstable channel:
+# nix-channel --add https://nixos.org/channels/nixos-unstable unstable
+# (I ran this command without being root and this works; with that
+# said it makes more sense that I should have run it as root).
+
 { config, pkgs, ... }:
 
 let
