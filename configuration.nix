@@ -324,7 +324,6 @@
     pavucontrol
     phinger-cursors
     picom
-    # picom-allusive
     # pinentry-gnome
     poppler
     pulseaudioFull
