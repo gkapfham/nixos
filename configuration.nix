@@ -315,6 +315,7 @@
     htop
     iotop
     killall
+    libgit2
     libnotify
     lightdm-mini-greeter
     litemdview
