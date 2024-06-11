@@ -257,7 +257,6 @@
       stow
       stress-ng
       unzip
-      # urlview
       urlscan
       vlc
       zathura
