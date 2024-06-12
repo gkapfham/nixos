@@ -287,6 +287,7 @@
     aspellDicts.en-science
     bibtool
     curl
+    dua
     du-dust
     easyeffects
     gcc
@@ -305,8 +306,10 @@
     file
     fwupd
     gimp
+    gdu
     git
     git-extras
+    glow
     gnupg
     gnome.adwaita-icon-theme
     gnome.seahorse
@@ -351,6 +354,7 @@
     zlib
     zip
     xsel
+    zenith
     zsh
     zsh-autocomplete
     # programming
