@@ -335,6 +335,7 @@
     rng-tools
     sct
     sshfs
+    systemctl-tui
     texlab
     texlive.combined.scheme-full
     themechanger
