@@ -145,9 +145,9 @@
   programs.light.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
-    xkb.layout = "us";
-    xkb.variant = "";
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
   };
 
   # Install fonts; note that this ensures the Nerd fonts
@@ -196,18 +196,22 @@
       # cli
       abook
       bat
+      bmon
       cloc
       croc
+      dig
       eva
       eza
       fzf
       imagemagick
       lesspipe
       neofetch
+      pastel
       ripgrep
       ripgrep-all
       rtx
       tmuxinator
+      trippy
       yazi
       # browsers
       brave
@@ -256,6 +260,7 @@
       starship
       stow
       stress-ng
+      tokei
       unzip
       urlscan
       vlc
@@ -330,6 +335,7 @@
     picom
     poppler
     pulseaudioFull
+    procs
     pstree
     rclone
     rng-tools
