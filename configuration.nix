@@ -206,6 +206,7 @@
       imagemagick
       lesspipe
       neofetch
+      netscanner
       pastel
       ripgrep
       ripgrep-all
