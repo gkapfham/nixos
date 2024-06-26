@@ -292,6 +292,7 @@
     aspellDicts.en-computers
     aspellDicts.en-science
     bibtool
+    bottom
     curl
     dua
     du-dust
