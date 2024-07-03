@@ -228,7 +228,6 @@
       feh
       i3wsr
       maim
-      polybar
       rofi
       rofimoji
       xbanish
