@@ -51,8 +51,9 @@
   hardware.sensor.iio.enable = false;
 
   # Although the iwd backend is suggested for
-  # stability, it does not enable the wireless
-  # network to resume after a sleep
+  # stability, it may not enable the wireless
+  # network to resume after a sleep and the
+  # network daemon may not always connect. 
   # networking.wireless.iwd.enable = true;
   # networking.networkmanager.wifi.backend = "iwd";
 
@@ -196,6 +197,7 @@
       # cli
       abook
       bat
+      bluetuith
       bmon
       cloc
       croc
@@ -211,6 +213,7 @@
       ripgrep
       ripgrep-all
       rtx
+      systemctl-tui
       tmuxinator
       trippy
       yazi
@@ -296,6 +299,7 @@
     dua
     du-dust
     easyeffects
+    evince
     gcc
     gcc-unwrapped
     gnumake
@@ -328,6 +332,7 @@
     lightdm-mini-greeter
     litemdview
     mdcat
+    networkmanagerapplet
     nix-search-cli
     nix-tree
     numlockx
