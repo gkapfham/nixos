@@ -212,7 +212,6 @@
       pastel
       ripgrep
       ripgrep-all
-      rtx
       systemctl-tui
       tmuxinator
       trippy
@@ -237,6 +236,7 @@
       xbindkeys
       # development
       ast-grep
+      mise
       ruff
       # editors
       universal-ctags
