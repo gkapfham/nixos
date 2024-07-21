@@ -207,12 +207,15 @@
       fzf
       imagemagick
       lesspipe
+      miniserve
       neofetch
       netscanner
       pastel
       ripgrep
       ripgrep-all
+      rm-improved
       systemctl-tui
+      tealdeer
       tmuxinator
       trippy
       yazi
