@@ -317,6 +317,7 @@
     iw
     iwd
     file
+    uv
     fwupd
     gimp
     gdu
@@ -407,6 +408,7 @@
     ]))
     quarto
     rustc
+    uv
     zulu
     # language servers
     gopls
