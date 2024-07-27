@@ -255,6 +255,7 @@
       fluent-gtk-theme
       # utilities
       atuin
+      bore-cli
       fasd
       fd
       gh
@@ -383,7 +384,7 @@
     pipx
     poetry
     prettierd
-    (python311.withPackages (ps: with ps; [
+    (python312.withPackages (ps: with ps; [
       bibtexparser
       cairosvg
       csscompressor
@@ -395,6 +396,7 @@
       pip
       plotly
       pnglatex
+      poetry-core
       prompt-toolkit
       pydocstyle
       pynvim
@@ -407,6 +409,7 @@
       rjsmin
     ]))
     quarto
+    R
     rustc
     uv
     zulu
