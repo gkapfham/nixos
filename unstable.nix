@@ -11,7 +11,7 @@
 # (I ran this command without being root and this works; with that
 # said it makes more sense that I should have run it as root).
 
-{ config, lib, pkgs, neovimUtils, wrapNeovimUnstable, ... }:
+{ config, pkgs, ... }:
 
 let
   unstableTarball =
@@ -20,31 +20,6 @@ let
   unstable = import unstableTarball {
     config = config.nixpkgs.config;
   };
-
-  # config = pkgs.neovimUtils.makeNeovimConfig {
-  #   extraLuaPackages = p: with p; [
-  #     # ... Other lua packages
-  #     p.magick # for image rendering
-  #   ];
-  #   extraPython3Packages = p: with p; [
-  #     pynvim
-  #     jupyter-client
-  #     cairosvg # for image rendering
-  #     ipython
-  #     nbformat
-  #     # ... Other python packages
-  #   ];
-  #   extraPackages = p: with p; [
-  #     imageMagick # for image rendering
-  #     # ... Other packages
-  #   ];
-  #   withNodeJs = true;
-  #   withRuby = true;
-  #   withPython3 = true;
-  #   # https://github.com/NixOS/nixpkgs/issues/211998
-  #   # customRC = "luafile ~/.config/nvim/init.lua";
-  # };
-
 
   my-python-packages = python-packages: with python-packages; [
     bibtexparser
