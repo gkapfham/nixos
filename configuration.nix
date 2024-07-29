@@ -287,7 +287,7 @@
 
   # List packages installed in system profile
   # System Packages: install programs that are
-  # available to all uses on the laptop
+  # available to all users on the laptop
   environment.systemPackages = with pkgs;
    [
     # tools and libraries
