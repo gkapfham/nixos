@@ -54,13 +54,24 @@ let
     rjsmin
   ];
 
+  # use the unstable version of Python
+  # with all of the custom packages defined
+  # by the default-python-packages variable
   python-with-custom-packages = unstable.python312.withPackages default-python-packages;
 
+  # use the unstable version of Quarto
+  # with all of the custom packages defined
+  # by the default-python-packages variable
   quarto-with-custom-python-packages = unstable.quarto.override {
     python3 = python-with-custom-packages;
     extraPythonPackages = default-python-packages;
   };
 
+  # use the unstable version of Neovim
+  # with a restricted number of Lua and Python
+  # packages for chosen plugins (note that the
+  # neovim configuration is defined in my dotfiles
+  # repository using Lazy.nvim and not in NixOS)
   neovim-with-custom-python-packages = unstable.neovim.override {
     extraLuaPackages = p: with p; [
       magick
@@ -83,6 +94,8 @@ let
 in
 {
 
+  # define the unstable (and specially configured) 
+  # system packages that are available to all users
   environment.systemPackages = with pkgs; [
     python-with-custom-packages
     quarto-with-custom-python-packages
