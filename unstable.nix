@@ -26,6 +26,8 @@ let
     cairosvg
     csscompressor
     htmlmin
+    ipython
+    ipykernel
     jupyter-client
     jupyterlab
     jupyterlab-git
@@ -49,21 +51,24 @@ let
 
   my-quarto = unstable.quarto.override {
     python3 = my-python;
+    extraPythonPackages = my-python-packages;
   };
 
   my-neovim = unstable.neovim.override {
     extraLuaPackages = p: with p; [
-      p.magick
+      magick
      ];
     extraPython3Packages = p: with p; [
       cairosvg
       ipython
+      ipykernel
       jupyter-client
       nbformat
       plotly
       pnglatex
       pynvim
       pyperclip
+      rich
     ];
 
   };
@@ -86,6 +91,7 @@ in
     my-neovim
     # unstable.neovim
     # neovim-custom
+    unstable.jupyter
     unstable.poetry
     unstable.tree-sitter
   ];
