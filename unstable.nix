@@ -3,7 +3,12 @@
 # programs, most notably neovim, that are not
 # available at their latest version in the
 # stable channel, thus prompting the limited
-# use of the unstable channel
+# use of the unstable channel.
+
+# Note that this also handles the configuration of
+# - Python packages available in NixOS
+# - Python
+# - Quarto
 
 # Note that this file assumes that the following command
 # has already been run to add the unstable channel:
@@ -21,7 +26,9 @@ let
     config = config.nixpkgs.config;
   };
 
-  my-python-packages = python-packages: with python-packages; [
+  # define the Python packages that should always be available
+  # inside of both system-wide Python and Quarto
+  default-python-packages = python-packages: with python-packages; [
     bibtexparser
     cairosvg
     csscompressor
@@ -47,14 +54,14 @@ let
     rjsmin
   ];
 
-  my-python = unstable.python312.withPackages my-python-packages;
+  python-with-custom-packages = unstable.python312.withPackages default-python-packages;
 
-  my-quarto = unstable.quarto.override {
-    python3 = my-python;
-    extraPythonPackages = my-python-packages;
+  quarto-with-custom-python-packages = unstable.quarto.override {
+    python3 = python-with-custom-packages;
+    extraPythonPackages = default-python-packages;
   };
 
-  my-neovim = unstable.neovim.override {
+  neovim-with-custom-python-packages = unstable.neovim.override {
     extraLuaPackages = p: with p; [
       magick
      ];
@@ -76,21 +83,10 @@ let
 in
 {
 
-  # nixpkgs.overlays = [
-  #   (_: super: {
-  #     neovim-custom = pkgs.wrapNeovimUnstable
-  #       (super.neovim-unwrapped.overrideAttrs (oldAttrs: {
-  #         buildInputs = oldAttrs.buildInputs ++ [ super.tree-sitter ];
-  #       })) config;
-  #   })
-  # ];
-
   environment.systemPackages = with pkgs; [
-    my-python
-    my-quarto
-    my-neovim
-    # unstable.neovim
-    # neovim-custom
+    python-with-custom-packages
+    quarto-with-custom-python-packages
+    neovim-with-custom-python-packages
     unstable.jupyter
     unstable.poetry
     unstable.tree-sitter
