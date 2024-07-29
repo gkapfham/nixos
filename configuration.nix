@@ -438,9 +438,9 @@
   # inside of the Nix store and thus the number of system
   # configurations that are available for selection at boot
   nix.gc = {
-    automatic = false;
+    automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 30d";
+    options = "--delete-older-than +30";
     randomizedDelaySec = "1 hour";
   };
 
