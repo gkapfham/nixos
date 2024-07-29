@@ -140,7 +140,7 @@
             '';
         };
 
-  # Use light from controlling backlight; see
+  # Use light for controlling the backlight; see
   # the i3 configuration for more details on
   # how to use command with the i3 window manager
   programs.light.enable = true;
