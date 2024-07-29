@@ -406,6 +406,7 @@
     zsh-autocomplete
     # programming
     cargo
+    clippy
     (import (fetchTarball https://install.devenv.sh/latest)).default
     go
     lua5_3_compat
@@ -413,38 +414,9 @@
     pipx
     poetry
     prettierd
-
-    # (python312.withPackages (ps: with ps; [
-    #   bibtexparser
-    #   cairosvg
-    #   csscompressor
-    #   htmlmin
-    #   jupyter-client
-    #   jupyterlab
-    #   jupyterlab-git
-    #   pillow
-    #   pip
-    #   plotly
-    #   pnglatex
-    #   poetry-core
-    #   prompt-toolkit
-    #   pydocstyle
-    #   pynvim
-    #   pyperclip
-    #   python-dotenv
-    #   pyyaml
-    #   requests
-    #   quarto
-    #   rich
-    #   rjsmin
-    # ]))
-    # my-python
-    # quarto
-    # poetry
-    # python
-    # quarto
     R
     rustc
+    rustfmt
     uv
     zulu
     # language servers
@@ -452,7 +424,9 @@
     lua-language-server
     marksman
     nodePackages.pyright
+    nil
     ruff-lsp
+    rust-analyzer
     statix
     vscode-langservers-extracted
     yaml-language-server
