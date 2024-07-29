@@ -4,35 +4,6 @@
 
 { config, pkgs, ... }:
 
-# let
-#   my-python-packages = ps: with ps; [
-#     bibtexparser
-#     cairosvg
-#     csscompressor
-#     htmlmin
-#     jupyter-client
-#     jupyterlab
-#     jupyterlab-git
-#     pillow
-#     pip
-#     plotly
-#     pnglatex
-#     poetry-core
-#     prompt-toolkit
-#     pydocstyle
-#     pynvim
-#     pyperclip
-#     python-dotenv
-#     pyyaml
-#     requests
-#     rich
-#     rjsmin
-#   ];
-  
-  # my-python = pkgs.python312.withPackages my-python-packages;
-
-# in
-
 {
 
   # Load other configuration files
