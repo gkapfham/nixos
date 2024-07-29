@@ -77,21 +77,21 @@ let
   };
 
   my-neovim = unstable.neovim.override {
-    # python3 = my-python;
+    extraLuaPackages = p: with p; [
+      p.magick
+     ];
     extraPython3Packages = p: with p; [
-      pynvim
-      jupyter-client
-      cairosvg # for image rendering
+      cairosvg
       ipython
+      jupyter-client
       nbformat
-      # ... Other python packages
+      plotly
+      pnglatex
+      pynvim
+      pyperclip
     ];
 
   };
-
-  # my-poetry = unstable.poetry.override {
-  #   python3 = my-python;
-  # };
 
 in
 {
