@@ -285,6 +285,10 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfreePredicate = _: true;
 
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "xpdf-4.05"
+  # ];
+
   # List packages installed in system profile
   # System Packages: install programs that are
   # available to all users on the laptop
@@ -345,6 +349,7 @@
     phinger-cursors
     picom
     poppler
+    poppler_utils
     pulseaudioFull
     procs
     pstree
@@ -369,6 +374,7 @@
     xorg.xcursorthemes
     xorg.xinit
     xorg.xrdb
+    # xpdf
     zlib
     zip
     xsel
