@@ -205,6 +205,7 @@
       eva
       eza
       fzf
+      flyctl
       imagemagick
       lesspipe
       miniserve
