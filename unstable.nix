@@ -40,6 +40,7 @@ let
     jupyterlab-git
     pillow
     pip
+    pipx
     plotly
     pnglatex
     poetry-core
