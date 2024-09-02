@@ -104,6 +104,7 @@ in
     unstable.jupyter
     unstable.poetry
     unstable.tree-sitter
+    unstable.ruff
   ];
 
   nixpkgs.config.packageOverrides = pkgs: {
