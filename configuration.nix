@@ -241,7 +241,6 @@
       # development
       ast-grep
       mise
-      ruff
       # editors
       universal-ctags
       # mail
