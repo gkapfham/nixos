@@ -31,6 +31,7 @@ let
   default-python-packages = python-packages: with python-packages; [
     bibtexparser
     cairosvg
+    cryptography
     csscompressor
     htmlmin
     ipython
