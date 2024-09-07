@@ -278,9 +278,9 @@
     ];
   };
 
-  # Use the neovim editor for the defaults
-  programs.neovim.enable = true;
-  programs.neovim.defaultEditor = true;
+  # # Use the neovim editor for the defaults
+  # programs.neovim.enable = true;
+  # programs.neovim.defaultEditor = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfreePredicate = _: true;
@@ -397,7 +397,7 @@
     marksman
     nodePackages.pyright
     nil
-    ruff-lsp
+    # ruff-lsp
     rust-analyzer
     statix
     vscode-langservers-extracted
