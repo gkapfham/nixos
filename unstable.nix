@@ -18,13 +18,23 @@
 
 { config, pkgs, ... }:
 
+# let
+#   unstableTarball =
+#     fetchTarball
+#       https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+#   unstable = import unstableTarball {
+#     config = config.nixpkgs.config;
+#   };
+
+# let
+#   # Use the nixos-unstable channel directly
+#   unstable = import <nixos-unstable> {
+#     config = config.nixpkgs.config;
+#   };
+
 let
-  unstableTarball =
-    fetchTarball
-      https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
-  unstable = import unstableTarball {
-    config = config.nixpkgs.config;
-  };
+  baseconfig = { allowUnfree = true; };
+  unstable = import <nixos-unstable> { config =  baseconfig; };
 
   # define the Python packages that should always be available
   # inside of both system-wide Python and Quarto
@@ -90,7 +100,6 @@ let
       pyperclip
       rich
     ];
-
   };
 
 in
@@ -98,15 +107,23 @@ in
 
   # define the unstable (and specially configured) 
   # system packages that are available to all users
-  environment.systemPackages = with pkgs; [
+  # environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     python-with-custom-packages
     quarto-with-custom-python-packages
     neovim-with-custom-python-packages
+    # (import (fetchTarball "channel:nixos-unstable") {}).neovim
+    # unstable.neovim
     unstable.jupyter
     unstable.poetry
     unstable.tree-sitter
     unstable.ruff
+    unstable.ruff-lsp
   ];
+
+  # Use the neovim editor for the defaults
+  # programs.neovim.enable = true;
+  # programs.neovim.defaultEditor = true;
 
   nixpkgs.config.packageOverrides = pkgs: {
     unstable = unstable;
