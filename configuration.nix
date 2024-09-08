@@ -397,7 +397,7 @@
     marksman
     nodePackages.pyright
     nil
-    # ruff-lsp
+    # ruff-lsp; moved to unstable
     rust-analyzer
     statix
     vscode-langservers-extracted
