@@ -21,8 +21,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Linux kernel: two options, with the second one being useful
+  # when there are problems with the latest kernel and thus there
+  # is a need to pin the installation to a specific version
+  # --> Install the latest kernel from the NixOS channel
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # --> Install a specific kernel version from the NixOS channel
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_10);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
   boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0"];
@@ -182,6 +187,10 @@
   # Enable touchpad support (enabled default in most desktopManager)
   services.libinput.enable = true;
 
+  # Note: some packages are not installed in either the user
+  # or the system profile and are instead installed through
+  # the unstable.nix file to ensure they are very up-to-date
+
   # Define a user account; password already created with passwd
   # User Packages: add the user's packages in separate sections
   # with each section organized in increasing alphabetical order
@@ -319,6 +328,7 @@
     iwd
     file
     uv
+    fw-ectool
     fwupd
     gimp
     gdu
