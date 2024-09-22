@@ -25,9 +25,9 @@
   # when there are problems with the latest kernel and thus there
   # is a need to pin the installation to a specific version
   # --> Install the latest kernel from the NixOS channel
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # --> Install a specific kernel version from the NixOS channel
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_10);
+  # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_10);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
   boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0"];
