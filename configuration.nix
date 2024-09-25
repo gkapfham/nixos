@@ -271,6 +271,7 @@
       jq
       mupdf
       pandoc
+      pkg-config
       powerstat
       powertop
       starship
