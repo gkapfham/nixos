@@ -347,6 +347,7 @@
     libnotify
     lightdm-mini-greeter
     litemdview
+    manix
     mdcat
     networkmanagerapplet
     nix-search-cli
