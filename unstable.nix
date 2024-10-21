@@ -35,6 +35,7 @@
 let
   baseconfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config =  baseconfig; };
+  stable = import <nixos> { config =  baseconfig; };
 
   # define the Python packages that should always be available
   # inside of both system-wide Python and Quarto
@@ -74,7 +75,8 @@ let
   # use the unstable version of Quarto
   # with all of the custom packages defined
   # by the default-python-packages variable
-  quarto-with-custom-python-packages = unstable.quarto.override {
+  quarto-with-custom-python-packages = stable.quarto.override {
+  # quarto-with-custom-python-packages = unstable.quarto.override {
     python3 = python-with-custom-packages;
     extraPythonPackages = default-python-packages;
   };
@@ -119,6 +121,7 @@ in
     unstable.tree-sitter
     unstable.ruff
     unstable.ruff-lsp
+    unstable.picom
   ];
 
   # Use the neovim editor for the defaults
