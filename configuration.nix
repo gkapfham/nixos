@@ -355,7 +355,7 @@
     numlockx
     pavucontrol
     phinger-cursors
-    picom
+    # picom
     poppler
     poppler_utils
     pulseaudioFull
