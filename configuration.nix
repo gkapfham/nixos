@@ -312,7 +312,6 @@
     curl
     dua
     du-dust
-    easyeffects
     evince
     gcc
     gcc-unwrapped
@@ -328,7 +327,6 @@
     iw
     iwd
     file
-    uv
     fw-ectool
     fwupd
     gimp
@@ -352,6 +350,7 @@
     networkmanagerapplet
     nix-search-cli
     nix-tree
+    nmap
     numlockx
     pavucontrol
     phinger-cursors
@@ -372,6 +371,7 @@
     tmux
     tree
     unar
+    uv
     wget
     wmctrl
     wordnet
