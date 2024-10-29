@@ -92,6 +92,7 @@ let
      ];
     extraPython3Packages = p: with p; [
       cairosvg
+      cryptography
       ipython
       ipykernel
       jupyter-client
