@@ -22,6 +22,7 @@ customize your Framework 13 AMD laptop with NixOS.
 - [🗑️ Garbage Collection](#-garbage-collection)
 - [📅 System State Version](#-system-state-version)
 - [🖥️ Hardware Configuration](#-hardware-configuration)
+- [🚀 Unstable Packages](#-unstable-packages)
 
 ## 📦 Imports
 
@@ -118,3 +119,43 @@ rust-analyzer, yaml-language-server
 - LUKS encryption for root filesystem
 - DHCP enabled for networking
 - AMD microcode updates enabled
+
+## 🚀 Unstable Packages
+
+- **Python Packages**: Uses the unstable version of Python 3.12 with custom
+packages including:
+  - `bibtexparser`
+  - `cairosvg`
+  - `cryptography`
+  - `csscompressor`
+  - `htmlmin`
+  - `ipython`
+  - `ipykernel`
+  - `jupyter-client`
+  - `jupyterlab`
+  - `jupyterlab-git`
+  - `pillow`
+  - `pip`
+  - `pipx`
+  - `plotly`
+  - `pnglatex`
+  - `poetry-core`
+  - `prompt-toolkit`
+  - `pydocstyle`
+  - `pynvim`
+  - `pyperclip`
+  - `python-dotenv`
+  - `pyyaml`
+  - `requests`
+  - `rich`
+  - `rjsmin`
+- **Quarto**: Uses the stable version of Quarto with custom Python packages.
+- **Neovim**: Uses the unstable version of Neovim with additional Lua and Python
+packages for plugins.
+- **Additional Unstable Packages**: Includes:
+  - `jupyter`
+  - `poetry`
+  - `tree-sitter`
+  - `ruff`
+  - `ruff-lsp`
+  - `picom`
