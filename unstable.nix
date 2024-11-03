@@ -18,20 +18,6 @@
 
 { config, pkgs, ... }:
 
-# let
-#   unstableTarball =
-#     fetchTarball
-#       https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
-#   unstable = import unstableTarball {
-#     config = config.nixpkgs.config;
-#   };
-
-# let
-#   # Use the nixos-unstable channel directly
-#   unstable = import <nixos-unstable> {
-#     config = config.nixpkgs.config;
-#   };
-
 let
   baseconfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config =  baseconfig; };
@@ -133,19 +119,3 @@ in
     unstable = unstable;
   };
 }
-
-# { config, pkgs, ... }:
-#
-# let
-#   baseconfig = { allowUnfree = true; };
-#   unstable = import <nixos-unstable> { config =  baseconfig; };
-# in
-# {
-#   environment.systemPackages = with pkgs; [
-#     # Neovim; note that the most recent version is
-#     # only available through the unstable channel
-#     (import (fetchTarball "channel:nixos-unstable") {}).neovim
-#     (import (fetchTarball "channel:nixos-unstable") {}).tree-sitter
-#     (import (fetchTarball "channel:nixos-unstable") {}).vim
-#   ];
-# }
