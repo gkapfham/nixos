@@ -108,6 +108,7 @@ in
     unstable.tree-sitter
     unstable.ruff
     unstable.ruff-lsp
+    unstable.uv
     unstable.picom
   ];
 

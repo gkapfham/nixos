@@ -371,7 +371,7 @@
     tmux
     tree
     unar
-    uv
+    # uv
     wget
     wmctrl
     wordnet
