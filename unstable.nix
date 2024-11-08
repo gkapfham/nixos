@@ -61,8 +61,8 @@ let
   # use the unstable version of Quarto
   # with all of the custom packages defined
   # by the default-python-packages variable
-  quarto-with-custom-python-packages = stable.quarto.override {
-  # quarto-with-custom-python-packages = unstable.quarto.override {
+  # quarto-with-custom-python-packages = stable.quarto.override {
+  quarto-with-custom-python-packages = unstable.quarto.override {
     python3 = python-with-custom-packages;
     extraPythonPackages = default-python-packages;
   };
@@ -101,8 +101,6 @@ in
     python-with-custom-packages
     quarto-with-custom-python-packages
     neovim-with-custom-python-packages
-    # (import (fetchTarball "channel:nixos-unstable") {}).neovim
-    # unstable.neovim
     unstable.jupyter
     unstable.poetry
     unstable.tree-sitter
