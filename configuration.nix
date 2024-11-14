@@ -30,7 +30,7 @@
   # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_10);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
-  boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0"];
+  boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0" "amdgpu.sg_display=0"];
 
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
@@ -215,6 +215,7 @@
       eza
       fzf
       flyctl
+      gum
       imagemagick
       lesspipe
       miniserve
@@ -229,6 +230,7 @@
       tmuxinator
       trippy
       yazi
+      yq-go
       # browsers
       brave
       chromium
@@ -354,7 +356,6 @@
     numlockx
     pavucontrol
     phinger-cursors
-    # picom
     poppler
     poppler_utils
     pulseaudioFull
@@ -363,6 +364,7 @@
     rclone
     rng-tools
     sct
+    sesh
     sshfs
     systemctl-tui
     texlab
