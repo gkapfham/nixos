@@ -108,6 +108,7 @@ in
     unstable.ruff-lsp
     unstable.uv
     unstable.picom
+    unstable.zoxide
   ];
 
   # Use the neovim editor for the defaults

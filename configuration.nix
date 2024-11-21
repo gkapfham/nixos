@@ -284,7 +284,6 @@
       urlscan
       vlc
       zathura
-      zoxide
       # llms
       ollama
     ];
