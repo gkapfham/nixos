@@ -101,6 +101,7 @@ in
     python-with-custom-packages
     quarto-with-custom-python-packages
     neovim-with-custom-python-packages
+    unstable.i3status
     unstable.jupyter
     unstable.poetry
     unstable.tree-sitter
