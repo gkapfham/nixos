@@ -24,13 +24,16 @@
   # Linux kernel: two options, with the second one being useful
   # when there are problems with the latest kernel and thus there
   # is a need to pin the installation to a specific version
-  # --> Install the latest kernel from the NixOS channel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  # --> Install a specific kernel version from the NixOS channel
-  # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_10);
+
+  # --> Option (1): Install the latest kernel from the NixOS channel
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # --> Option (2): Install a specific kernel version from the NixOS channel
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_12);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
-  boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0" "mt7921e.disable_aspm=y" "btusb.enable_autosuspend=0"];
+  # boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0" "mt7921e.disable_aspm=y" "btusb.enable_autosuspend=0"];
+  boot.kernelParams = [ "mem_sleep_default=s2idle" ];
 
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
