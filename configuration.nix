@@ -32,8 +32,14 @@
   boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_12);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
-  # boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0" "mt7921e.disable_aspm=y" "btusb.enable_autosuspend=0"];
+  # There are currently two options for the kernel parameters:
+  
+  # --> Option (1): Use minimal kernel parameters
   boot.kernelParams = [ "mem_sleep_default=s2idle" ];
+
+  # --> Option (2): Use several kernel parameters as needed
+  # to ensure system stability and to support suspend
+  # boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0" "mt7921e.disable_aspm=y" "btusb.enable_autosuspend=0"];
 
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
@@ -43,6 +49,15 @@
   services.logind.lidSwitch = "suspend";
   services.logind.lidSwitchExternalPower = "suspend";
   services.logind.lidSwitchDocked = "suspend";
+
+  # Configure the automatic mounting of external
+  # USB drives; note that they are mounted according
+  # to the user that is active, meaning that it can
+  # be the lightdm user when the system is booting
+  # or, otherwise, the user that is logged in
+  services.devmon.enable = true;
+  services.gvfs.enable = true; 
+  services.udisks2.enable = true;
 
   # Define the hostname
   networking.hostName = "diameno";
@@ -211,6 +226,8 @@
       bat
       bluetuith
       bmon
+      borgbackup
+      borgmatic
       cloc
       croc
       dig
