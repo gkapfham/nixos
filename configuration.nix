@@ -41,17 +41,8 @@
   # to ensure system stability and to support suspend
   # boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0" "mt7921e.disable_aspm=y" "btusb.enable_autosuspend=0"];
 
-  # disable the use of bluetooth on sleep as this (is reported to)
-  # cause problems with the system resuming from sleep when using
-  # the AMD CPU and the Mediatek wireless and bluetooth chip
-  systemd.services.disable-bluetooth-before-sleep = {
-    description = "Disable Bluetooth before sleep";
-    wantedBy = [ "sleep.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.systemd}/bin/systemctl stop bluetooth.service";
-    };
-  };
+  # Attempt a workaround for the suspend issue with the Framework 13 AMD
+  systemd.services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
 
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
