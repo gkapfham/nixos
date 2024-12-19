@@ -420,6 +420,7 @@ in
     rng-tools
     sct
     sesh
+    sqlite
     sshfs
     texlab
     texlive.combined.scheme-full
@@ -469,6 +470,12 @@ in
     vscode-langservers-extracted
     yaml-language-server
 ];
+
+  # Define the environment variables for the system
+  # so that the sqlite3 library is available to programs
+  environment.variables = {
+    LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
+  };
 
   # Enable update of the firmware through Linux
   services.fwupd.enable = true;
