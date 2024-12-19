@@ -456,7 +456,6 @@ in
     R
     rustc
     rustfmt
-    uv
     zulu
     # language servers
     gopls
