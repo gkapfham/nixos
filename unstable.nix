@@ -21,7 +21,7 @@
 let
   baseconfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config =  baseconfig; };
-  stable = import <nixos> { config =  baseconfig; };
+  # stable = import <nixos> { config =  baseconfig; };
 
   # define the Python packages that should always be available
   # inside of both system-wide Python and Quarto
@@ -30,6 +30,7 @@ let
     cairosvg
     cryptography
     csscompressor
+    distro
     htmlmin
     ipython
     ipykernel
@@ -47,10 +48,12 @@ let
     pynvim
     pyperclip
     python-dotenv
+    pyudev
     pyyaml
     requests
     rich
     rjsmin
+    systemd
   ];
 
   # use the unstable version of Python
@@ -61,7 +64,6 @@ let
   # use the unstable version of Quarto
   # with all of the custom packages defined
   # by the default-python-packages variable
-  # quarto-with-custom-python-packages = stable.quarto.override {
   quarto-with-custom-python-packages = unstable.quarto.override {
     python3 = python-with-custom-packages;
     extraPythonPackages = default-python-packages;
