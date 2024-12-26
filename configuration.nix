@@ -41,7 +41,7 @@ in
   # There are currently two options for the kernel parameters:
   
   # --> Option (1): Use minimal kernel parameters
-  boot.kernelParams = [ "mem_sleep_default=s2idle" ];
+  boot.kernelParams = [ "mem_sleep_default=s2idle" "mt7921e.disable_aspm=y" ];
 
   # --> Option (2): Use several kernel parameters as needed
   # to ensure system stability and to support suspend
@@ -242,6 +242,19 @@ in
   # Enable touchpad support (enabled default in most desktopManager)
   services.libinput.enable = true;
 
+  # Create a customized version of the polybar package
+  # that includes support for i3 and pulseaudio; note
+  # that if this configuration does not exist then
+  # the default polybar configuration will not work
+  nixpkgs.config = {
+    packageOverrides = pkgs: rec {
+      polybar = pkgs.polybar.override {
+        i3Support = true;
+        pulseSupport = true;
+      };
+    };
+  };
+
   # Note: some packages are not installed in either the user
   # or the system profile and are instead installed through
   # the unstable.nix file to ensure they are very up-to-date
@@ -302,6 +315,7 @@ in
       feh
       i3wsr
       maim
+      polybar
       rofi
       rofimoji
       xbanish
