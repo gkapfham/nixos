@@ -41,14 +41,22 @@ in
   # There are currently two options for the kernel parameters:
   
   # --> Option (1): Use minimal kernel parameters
-  boot.kernelParams = [ "mem_sleep_default=s2idle" "mt7921e.disable_aspm=y" ];
+  boot.kernelParams = [ "mem_sleep_default=s2idle" ];
 
   # --> Option (2): Use several kernel parameters as needed
   # to ensure system stability and to support suspend
   # boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0" "mt7921e.disable_aspm=y" "btusb.enable_autosuspend=0"];
+  # boot.kernelParams = [ "mem_sleep_default=s2idle" "mt7921e.disable_aspm=y" "amdgpu.dcdebugmask=0x210" ];
 
   # Attempt a workaround for the suspend issue with the Framework 13 AMD
-  systemd.services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
+  # systemd.services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
+  # boot.resumeDevice = "/dev/disk/by-uuid/88241d00-b88c-4740-8971-769b91f7518e";
+  powerManagement.enable = true;
+
+  # swapDevices = [{
+  #   device = "/swapfile";
+  #   size = 32 * 1024; # 32 GB
+  # }];
 
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
