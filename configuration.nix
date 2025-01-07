@@ -127,7 +127,6 @@ in
 
   # Setup hardware support to X11
   hardware.graphics.enable = true;
-  # hardware.opengl.driSupport = true;
 
   # Do not use wayland
   services.xserver.displayManager.gdm.wayland = false;
@@ -372,10 +371,6 @@ in
       ollama
     ];
   };
-
-  # # Use the neovim editor for the defaults
-  # programs.neovim.enable = true;
-  # programs.neovim.defaultEditor = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfreePredicate = _: true;
