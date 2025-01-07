@@ -21,7 +21,6 @@
 let
   baseconfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config =  baseconfig; };
-  # stable = import <nixos> { config =  baseconfig; };
 
   # define the Python packages that should always be available
   # inside of both system-wide Python and Quarto
