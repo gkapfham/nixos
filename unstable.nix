@@ -115,10 +115,6 @@ in
     unstable.zoxide
   ];
 
-  # Use the neovim editor for the defaults
-  # programs.neovim.enable = true;
-  # programs.neovim.defaultEditor = true;
-
   nixpkgs.config.packageOverrides = pkgs: {
     unstable = unstable;
   };
