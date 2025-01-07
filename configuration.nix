@@ -51,12 +51,18 @@ in
   # Attempt a workaround for the suspend issue with the Framework 13 AMD
   # systemd.services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
   # boot.resumeDevice = "/dev/disk/by-uuid/88241d00-b88c-4740-8971-769b91f7518e";
-  powerManagement.enable = true;
+  # powerManagement.enable = true;
 
+  # define a swap file
   # swapDevices = [{
   #   device = "/swapfile";
   #   size = 32 * 1024; # 32 GB
   # }];
+
+  # delete any swap that was previously created;
+  # note that this still requires a manual step
+  # of deleting the swapfile in the file system
+  swapDevices = lib.mkForce [ ];
 
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
@@ -120,8 +126,8 @@ in
   services.xserver.enable = true;
 
   # Setup hardware support to X11
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
+  hardware.graphics.enable = true;
+  # hardware.opengl.driSupport = true;
 
   # Do not use wayland
   services.xserver.displayManager.gdm.wayland = false;
@@ -152,15 +158,15 @@ in
         auth       required                    ${pkgs.fprintd}/lib/security/pam_fprintd.so
         auth       optional                    pam_permit.so
         auth       required                    pam_env.so
-        auth       [success=ok default=1]      ${pkgs.gnome.gdm}/lib/security/pam_gdm.so
-        auth       optional                    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
+        auth       [success=ok default=1]      ${pkgs.gdm}/lib/security/pam_gdm.so
+        auth       optional                    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so
 
         account    include                     login
 
         password   required                    pam_deny.so
 
         session    include                     login
-        session    optional                    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
+        session    optional                    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
       '';
     };
 
@@ -237,7 +243,7 @@ in
   services.printing.enable = true;
 
   # Enable sound with pipewire
-  sound.enable = true;
+  # sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -277,7 +283,7 @@ in
     packages = with pkgs; [
       # terminal
       alacritty
-      gnome.gnome-terminal
+      gnome-terminal
       kitty
       # cli
       abook
@@ -414,8 +420,8 @@ in
     git-extras
     glow
     gnupg
-    gnome.adwaita-icon-theme
-    gnome.seahorse
+    adwaita-icon-theme
+    seahorse
     hsetroot
     htop
     iotop
@@ -484,7 +490,7 @@ in
     gopls
     lua-language-server
     marksman
-    nodePackages.pyright
+    pyright
     nil
     # ruff-lsp; moved to unstable
     rust-analyzer
