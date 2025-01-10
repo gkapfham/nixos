@@ -459,6 +459,7 @@ in
     xdotool
     xorg.xbacklight
     xorg.xcursorthemes
+    xorg.xev
     xorg.xinit
     xorg.xrdb
     zlib
