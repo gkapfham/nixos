@@ -41,7 +41,7 @@ in
   # There are currently two options for the kernel parameters:
   
   # --> Option (1): Use minimal kernel parameters
-  boot.kernelParams = [ "mem_sleep_default=s2idle" ];
+  boot.kernelParams = [ "mem_sleep_default=s2idle" "amdgpu.dcdebugmask=0x210" ];
 
   # --> Option (2): Use several kernel parameters as needed
   # to ensure system stability and to support suspend
