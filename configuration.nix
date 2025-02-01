@@ -35,7 +35,7 @@ in
   # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # --> Option (2): Install a specific kernel version from the NixOS channel
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_12);
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_13);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
   # There are currently two options for the kernel parameters:
@@ -433,6 +433,7 @@ in
     nmap
     numlockx
     pavucontrol
+    pciutils
     phinger-cursors
     poppler
     poppler_utils
@@ -476,7 +477,7 @@ in
     lua5_3_compat
     nodejs_22
     pipx
-    poetry
+    # poetry
     prettierd
     R
     rustc
