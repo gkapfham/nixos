@@ -88,6 +88,10 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Disable the firewall so that other
+  # services can connect to localhost
+  networking.firewall.enable = false; 
+
   # Automatically set the regulatory domain for
   # the wireless network card
   hardware.wirelessRegulatoryDatabase = true;
@@ -317,6 +321,7 @@ in
       # browsers
       brave
       chromium
+      deskreen
       discord
       firefox
       qutebrowser
@@ -471,6 +476,7 @@ in
     zsh
     zsh-autocomplete
     # programming
+    android-tools
     cargo
     clippy
     go
