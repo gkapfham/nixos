@@ -322,6 +322,7 @@ in
       brave
       chromium
       deskreen
+      weylus
       discord
       firefox
       qutebrowser
