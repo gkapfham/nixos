@@ -104,6 +104,7 @@ in
     neovim-with-custom-python-packages
     unstable.ast-grep
     unstable.harper
+    unstable.fzf
     unstable.i3status
     unstable.jupyter
     unstable.poetry
