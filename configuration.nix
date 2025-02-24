@@ -27,6 +27,8 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # boot.initrd.kernelModules = [ "amdgpu" ];
+
   # Linux kernel: two options, with the second one being useful
   # when there are problems with the latest kernel and thus there
   # is a need to pin the installation to a specific version
@@ -131,6 +133,10 @@ in
 
   # Setup hardware support to X11
   hardware.graphics.enable = true;
+
+  # Ensure that the X11 server uses the
+  # amdgpu driver for the integrated GPU
+  # services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Do not use wayland
   services.xserver.displayManager.gdm.wayland = false;
@@ -300,7 +306,6 @@ in
       dig
       eva
       eza
-      fzf
       flyctl
       gum
       imagemagick
@@ -344,7 +349,10 @@ in
       # editors
       universal-ctags
       # mail
+      aerc
       gettext
+      himalaya
+      inetutils
       isync
       msmtp
       mutt
@@ -395,6 +403,7 @@ in
     aspellDicts.en-science
     bibtool
     bottom
+    csvlens
     curl
     dua
     du-dust
@@ -433,6 +442,7 @@ in
     litemdview
     manix
     mdcat
+    mdl
     networkmanagerapplet
     nix-search-cli
     nix-tree
@@ -441,6 +451,7 @@ in
     pavucontrol
     pciutils
     phinger-cursors
+    pinentry-all
     poppler
     poppler_utils
     pulseaudioFull
@@ -531,6 +542,7 @@ in
     enable = true;
     pinentryPackage = pkgs.pinentry-gnome3;
   };
+  services.pcscd.enable = true;
 
   # Enable the ssh agent
   programs.ssh.startAgent = true;
