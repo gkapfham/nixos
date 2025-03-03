@@ -103,6 +103,7 @@ in
     quarto-with-custom-python-packages
     neovim-with-custom-python-packages
     unstable.ast-grep
+    unstable.cargo
     unstable.harper
     unstable.fzf
     unstable.i3status
@@ -111,6 +112,8 @@ in
     unstable.tree-sitter
     unstable.ruff
     unstable.ruff-lsp
+    unstable.rustc
+    unstable.rustfmt
     unstable.uv
     unstable.picom
     unstable.zoxide

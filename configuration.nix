@@ -325,6 +325,7 @@ in
       weylus
       discord
       firefox
+      lynx
       qutebrowser
       w3m
       # desktop
@@ -486,17 +487,18 @@ in
     zsh-autocomplete
     # programming
     android-tools
-    cargo
+    # cargo
     clippy
     go
     lua5_3_compat
+    luajitPackages.tiktoken_core
     nodejs_22
     pipx
     # poetry
     prettierd
     R
-    rustc
-    rustfmt
+    # rustc
+    # rustfmt
     zulu
     # language servers
     gopls
