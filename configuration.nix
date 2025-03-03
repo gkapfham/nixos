@@ -300,6 +300,7 @@ in
       dig
       eva
       eza
+      fastfetch
       flyctl
       gum
       imagemagick
