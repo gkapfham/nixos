@@ -55,16 +55,10 @@ in
   # boot.resumeDevice = "/dev/disk/by-uuid/88241d00-b88c-4740-8971-769b91f7518e";
   # powerManagement.enable = true;
 
-  # define a swap file
-  # swapDevices = [{
-  #   device = "/swapfile";
-  #   size = 32 * 1024; # 32 GB
-  # }];
-
   # delete any swap that was previously created;
   # note that this still requires a manual step
   # of deleting the swapfile in the file system
-  swapDevices = lib.mkForce [ ];
+  # swapDevices = lib.mkForce [ ];
 
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
@@ -410,10 +404,12 @@ in
     evince
     gcc
     gcc-unwrapped
+    ghostscript
     gnumake
     killall
     lazygit
     libinput-gestures
+    linux-firmware
     linuxKernel.packages.linux_zen.cpupower
     lm_sensors
     lxappearance
@@ -522,6 +518,9 @@ in
 
   # Enable update of the firmware through Linux
   services.fwupd.enable = true;
+
+  # Enable redistributable firmware
+  hardware.enableRedistributableFirmware = true;
 
   # Enable the bolt protocol for thunderbolt docks
   services.hardware.bolt.enable = true;
