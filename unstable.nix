@@ -22,6 +22,13 @@ let
   baseconfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config =  baseconfig; };
 
+  # permit the installation of a program that has a known security
+  # vulnerability in the current version; note that this is required
+  # otherwise it is not possible to install the package
+  baseconfig.permittedInsecurePackages = [
+    "deskflow-1.19.0"
+  ];
+
   # define the Python packages that should always be available
   # inside of both system-wide Python and Quarto
   default-python-packages = python-packages: with python-packages; [
@@ -104,6 +111,7 @@ in
     neovim-with-custom-python-packages
     unstable.ast-grep
     unstable.cargo
+    unstable.deskflow
     unstable.harper
     unstable.fzf
     unstable.i3status
