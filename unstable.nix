@@ -79,8 +79,10 @@ let
   # with a restricted number of Lua and Python
   # packages for chosen plugins (note that the
   # neovim configuration is defined in my dotfiles
-  # repository using Lazy.nvim and not in NixOS)
-  neovim-with-custom-python-packages = unstable.neovim.override {
+  # repository using Lazy.nvim and not in NixOS);
+  # NOTE: temporarily stop using the unstable version
+  # of neovim until plugins start to support 0.11.0
+  neovim-with-custom-python-packages = pkgs.neovim.override {
     extraLuaPackages = p: with p; [
       magick
      ];
