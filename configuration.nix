@@ -37,12 +37,14 @@ in
   # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # --> Option (2): Install a specific kernel version from the NixOS channel
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_13);
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_14);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
   # There are currently two options for the kernel parameters:
   
   # --> Option (1): Use minimal kernel parameters
+  # boot.kernelParams = [ "mem_sleep_default=deep" "amdgpu.dcdebugmask=0x10" "preempt=full" "rcu_nocbs=all" "rcutree.enable_rcu_lazy=1" ];
+
   boot.kernelParams = [ "mem_sleep_default=s2idle" "amdgpu.dcdebugmask=0x10" ];
 
   # --> Option (2): Use several kernel parameters as needed
@@ -442,6 +444,7 @@ in
     libnotify
     lightdm-mini-greeter
     litemdview
+    microcode-amd
     manix
     mdcat
     mdl
@@ -450,6 +453,7 @@ in
     nix-tree
     nmap
     numlockx
+    nvme-cli
     pavucontrol
     pciutils
     phinger-cursors
