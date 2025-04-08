@@ -342,6 +342,7 @@ in
       dunst
       feh
       i3wsr
+      j4-dmenu-desktop
       maim
       polybar
       rofi
@@ -416,6 +417,7 @@ in
     gcc-unwrapped
     ghostscript
     gnumake
+    highlight-pointer
     killall
     lazygit
     libinput-gestures
