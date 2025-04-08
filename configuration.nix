@@ -45,7 +45,9 @@ in
   # --> Option (1): Use minimal kernel parameters
   # boot.kernelParams = [ "mem_sleep_default=deep" "amdgpu.dcdebugmask=0x10" "preempt=full" "rcu_nocbs=all" "rcutree.enable_rcu_lazy=1" ];
 
-  boot.kernelParams = [ "mem_sleep_default=s2idle" "amdgpu.dcdebugmask=0x10" ];
+  # --> Option (1): Use minimal kernel parameters, including one that turns off ASPM,
+  # which seems to enable suspend to work on the Framework 13 AMD laptop when using a dock
+  boot.kernelParams = [ "mem_sleep_default=s2idle" "amdgpu.dcdebugmask=0x10" "pcie_aspm=off" ];
 
   # --> Option (2): Use several kernel parameters as needed
   # to ensure system stability and to support suspend
