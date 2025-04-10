@@ -27,8 +27,6 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # boot.initrd.kernelModules = [ "amdgpu" ];
-
   # Linux kernel: two options, with the second one being useful
   # when there are problems with the latest kernel and thus there
   # is a need to pin the installation to a specific version
@@ -41,9 +39,6 @@ in
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
   # There are currently two options for the kernel parameters:
-  
-  # --> Option (1): Use minimal kernel parameters
-  # boot.kernelParams = [ "mem_sleep_default=deep" "amdgpu.dcdebugmask=0x10" "preempt=full" "rcu_nocbs=all" "rcutree.enable_rcu_lazy=1" ];
 
   # --> Option (1): Use minimal kernel parameters, including one that turns off ASPM,
   # which seems to enable suspend to work on the Framework 13 AMD laptop when using a dock
@@ -53,16 +48,6 @@ in
   # to ensure system stability and to support suspend
   # boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0" "mt7921e.disable_aspm=y" "btusb.enable_autosuspend=0"];
   # boot.kernelParams = [ "mem_sleep_default=s2idle" "mt7921e.disable_aspm=y" "amdgpu.dcdebugmask=0x210" ];
-
-  # Attempt a workaround for the suspend issue with the Framework 13 AMD
-  # systemd.services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-  # boot.resumeDevice = "/dev/disk/by-uuid/88241d00-b88c-4740-8971-769b91f7518e";
-  # powerManagement.enable = true;
-
-  # delete any swap that was previously created;
-  # note that this still requires a manual step
-  # of deleting the swapfile in the file system
-  # swapDevices = lib.mkForce [ ];
 
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
@@ -280,6 +265,15 @@ in
     };
   };
 
+  # Enable the use of the GTK3 theme
+  # for any programs running QT; this
+  # is especially helpful for theming
+  # programs like deskflow that use QT
+  environment.sessionVariables = {
+    QT_QPA_PLATFORMTHEME="gtk3";
+
+  };
+
   # Note: some packages are not installed in either the user
   # or the system profile and are instead installed through
   # the unstable.nix file to ensure they are very up-to-date
@@ -329,7 +323,7 @@ in
       # browsers
       brave
       chromium
-      deskreen
+      # deskreen
       weylus
       discord
       firefox
@@ -365,6 +359,7 @@ in
       neomutt
       pass
       # theme
+      adwaita-qt
       fluent-gtk-theme
       # utilities
       atuin
