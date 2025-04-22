@@ -82,7 +82,7 @@ let
   # repository using Lazy.nvim and not in NixOS);
   # NOTE: temporarily stop using the unstable version
   # of neovim until plugins start to support 0.11.0
-  neovim-with-custom-python-packages = pkgs.neovim.override {
+  neovim-with-custom-python-packages = unstable.neovim.override {
     extraLuaPackages = p: with p; [
       magick
      ];
@@ -113,6 +113,7 @@ in
     neovim-with-custom-python-packages
     unstable.ast-grep
     unstable.cargo
+    unstable.copilot-language-server
     unstable.deskflow
     unstable.harper
     unstable.fzf
