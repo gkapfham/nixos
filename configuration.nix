@@ -323,7 +323,6 @@ in
       # browsers
       brave
       chromium
-      # deskreen
       weylus
       discord
       firefox
@@ -347,6 +346,8 @@ in
       mise
       # editors
       universal-ctags
+      # databases
+      duckdb
       # mail
       aerc
       gettext
