@@ -267,8 +267,9 @@ in
 
   # Enable the use of the GTK3 theme
   # for any programs running QT; this
-  # is especially helpful for theming
-  # programs like deskflow that use QT
+  # is especially helpful for setting
+  # a theme for programs like deskflow
+  # that use QT
   environment.sessionVariables = {
     QT_QPA_PLATFORMTHEME="gtk3";
 
