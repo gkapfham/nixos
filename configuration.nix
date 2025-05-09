@@ -459,6 +459,7 @@ in
     pciutils
     phinger-cursors
     pinentry-all
+    pngquant
     poppler
     poppler_utils
     pulseaudioFull
