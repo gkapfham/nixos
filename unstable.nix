@@ -115,14 +115,15 @@ in
     unstable.cargo
     unstable.copilot-language-server
     unstable.deskflow
+    unstable.decktape
     unstable.harper
     unstable.fzf
     unstable.i3status
     unstable.jupyter
     unstable.poetry
+    unstable.poppler
     unstable.tree-sitter
     unstable.ruff
-    unstable.ruff-lsp
     unstable.rustc
     unstable.rustfmt
     unstable.uv
