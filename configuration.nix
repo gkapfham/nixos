@@ -344,6 +344,8 @@ in
       xbanish
       xbindkeys
       # development
+      openjdk
+      maven
       mise
       # editors
       universal-ctags
@@ -477,6 +479,7 @@ in
     tmux
     tree
     unar
+    upower
     wavemon
     wget
     wmctrl
