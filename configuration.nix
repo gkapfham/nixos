@@ -279,6 +279,8 @@ in
   # or the system profile and are instead installed through
   # the unstable.nix file to ensure they are very up-to-date
 
+  # User packages: install programs for a specific user
+
   # Define a user account; password already created with passwd
   # User Packages: add the user's packages in separate sections
   # with each section organized in increasing alphabetical order
@@ -392,6 +394,9 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfreePredicate = _: true;
+
+  # System packages: install programs that are
+  # available to all users on the laptop
 
   # List packages installed in system profile
   # System Packages: install programs that are
