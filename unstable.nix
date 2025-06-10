@@ -127,6 +127,7 @@ in
     unstable.rustc
     unstable.rustfmt
     unstable.uv
+    unstable.ty
     unstable.picom
     unstable.zoxide
   ];
