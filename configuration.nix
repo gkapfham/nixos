@@ -516,8 +516,6 @@ in
     # poetry
     prettierd
     R
-    # rustc
-    # rustfmt
     zulu
     # language servers
     gopls
