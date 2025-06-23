@@ -226,8 +226,10 @@ in
   # to the fonts that are installed from Nix packages
 
   fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
     maple-mono.NF
+    maple-mono.Normal-NF
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.monaspace
     nerd-fonts.hack
     nerd-fonts.roboto-mono
   ];
