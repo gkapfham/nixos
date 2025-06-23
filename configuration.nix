@@ -228,9 +228,9 @@ in
   fonts.packages = with pkgs; [
     maple-mono.NF
     maple-mono.Normal-NF
+    nerd-fonts.hack
     nerd-fonts.jetbrains-mono
     nerd-fonts.monaspace
-    nerd-fonts.hack
     nerd-fonts.roboto-mono
   ];
 
