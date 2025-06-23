@@ -121,10 +121,6 @@ in
   # Setup hardware support to X11
   hardware.graphics.enable = true;
 
-  # Ensure that the X11 server uses the
-  # amdgpu driver for the integrated GPU
-  # services.xserver.videoDrivers = [ "amdgpu" ];
-
   # Do not use wayland
   services.xserver.displayManager.gdm.wayland = false;
 
