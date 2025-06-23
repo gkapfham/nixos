@@ -569,17 +569,6 @@ in
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;
 
-  # # Configure automatic garbage collection for NixOS state;
-  # # this controls the number of generations that are kept
-  # # inside of the Nix store and thus the number of system
-  # # configurations that are available for selection at boot
-  # nix.gc = {
-  #   automatic = true;
-  #   dates = "weekly";
-  #   options = "--delete-older-than +30";
-  #   randomizedDelaySec = "1 hour";
-  # };
-
   # Configure automatic garbage collection for NixOS state;
   # this controls the number of generations that are kept
   # inside of the Nix store and thus the number of system
