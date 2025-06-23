@@ -220,7 +220,6 @@ in
   # Install fonts; note that this ensures the Nerd fonts
   # with all of their affiliated symbols are applied
   # to the fonts that are installed from Nix packages
-
   fonts.packages = with pkgs; [
     maple-mono.NF
     maple-mono.Normal-NF
