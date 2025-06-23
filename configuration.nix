@@ -224,10 +224,18 @@ in
   # Install fonts; note that this ensures the Nerd fonts
   # with all of their affiliated symbols are applied
   # to the fonts that are installed from Nix packages
+
+  # fonts.packages = with pkgs; [
+  #   hack-font
+  #   roboto-mono
+  #   (nerdfonts.override { fonts = [ "Hack" "RobotoMono" ]; })
+  # ];
+
   fonts.packages = with pkgs; [
-    hack-font
-    roboto-mono
-    (nerdfonts.override { fonts = [ "Hack" "RobotoMono" ]; })
+    nerd-fonts.jetbrains-mono
+    maple-mono.NF
+    nerd-fonts.hack
+    nerd-fonts.roboto-mono
   ];
 
   # Enable support for Bluetooth
@@ -240,7 +248,7 @@ in
 
   # Enable sound with pipewire
   # sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
