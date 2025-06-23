@@ -225,12 +225,6 @@ in
   # with all of their affiliated symbols are applied
   # to the fonts that are installed from Nix packages
 
-  # fonts.packages = with pkgs; [
-  #   hack-font
-  #   roboto-mono
-  #   (nerdfonts.override { fonts = [ "Hack" "RobotoMono" ]; })
-  # ];
-
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     maple-mono.NF
