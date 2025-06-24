@@ -274,6 +274,14 @@ in
 
   };
 
+  # Enable nix-ld so that it is possible
+  # to install pre-compiled binaries that
+  # that expect libraries to be in standard FHS
+  # locations; this is especially helpful for
+  # the installation of Python programs that
+  # have C, C++, or Rust extensions
+  programs.nix-ld.enable = true;
+
   # Note: some packages are not installed in either the user
   # or the system profile and are instead installed through
   # the unstable.nix file to ensure they are very up-to-date
