@@ -576,7 +576,7 @@ in
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 30d --keep-generations 25";
+    options = "--delete-older-than 60d";
     randomizedDelaySec = "1 hour";
   };
 
