@@ -118,6 +118,7 @@ in
     unstable.decktape
     unstable.harper
     unstable.fzf
+    unstable.fzy
     unstable.i3status
     unstable.jupyter
     unstable.poetry
