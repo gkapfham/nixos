@@ -137,6 +137,17 @@ in
   # Enable the fingerprint reader
   services.fprintd.enable = true;
 
+  # Enable the i3lock screen locker
+  # to use Pam and thus the fingerprint
+  # reader for authentication (note that
+  # this changed on a recent NixOS release;
+  # look in /etc/pam.d/i3lock for the symlink
+  # and if it does not exist then this suggests
+  # that using a fingerprint with i3lock is
+  # not correctly configured)
+  programs.i3lock.enable = true;
+  security.pam.services.i3lock.enable = true;
+
   # Enable authentication with the fingerprint
   # using the enrolled fprintd fingerprint(s)
   security.pam.services.login.fprintAuth = false;
