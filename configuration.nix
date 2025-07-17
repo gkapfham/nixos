@@ -391,6 +391,9 @@ in
       fasd
       fd
       gh
+      gron
+      ijq
+      jless
       jq
       mupdf
       pandoc
