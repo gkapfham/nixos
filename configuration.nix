@@ -44,11 +44,6 @@ in
   # which seems to enable suspend to work on the Framework 13 AMD laptop when using a dock
   boot.kernelParams = [ "mem_sleep_default=s2idle" "amdgpu.dcdebugmask=0x10" "pcie_aspm=off" ];
 
-  # --> Option (2): Use several kernel parameters as needed
-  # to ensure system stability and to support suspend
-  # boot.kernelParams = [ "mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0" "mt7921e.disable_aspm=y" "btusb.enable_autosuspend=0"];
-  # boot.kernelParams = [ "mem_sleep_default=s2idle" "mt7921e.disable_aspm=y" "amdgpu.dcdebugmask=0x210" ];
-
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
   # --> when running on battery power
