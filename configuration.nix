@@ -89,6 +89,10 @@ in
   # installs the cli-based program and runs the daemon
   services.tailscale.enable = true;
 
+  # Enable auto-cpufreq service
+  services.power-profiles-daemon.enable = false;
+  services.auto-cpufreq.enable = true;
+
   # Although the iwd backend is suggested for
   # stability, it may not enable the wireless
   # network to resume after a sleep and the
