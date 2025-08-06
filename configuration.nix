@@ -38,9 +38,8 @@ in
   boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_15);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
-  # There are currently two options for the kernel parameters:
 
-  # --> Option (1): Use minimal kernel parameters, including one that turns off ASPM,
+  # Use minimal kernel parameters, including one that turns off ASPM,
   # which seems to enable suspend to work on the Framework 13 AMD laptop when using a dock
   boot.kernelParams = [ "mem_sleep_default=s2idle" "amdgpu.dcdebugmask=0x10" "pcie_aspm=off" ];
 
