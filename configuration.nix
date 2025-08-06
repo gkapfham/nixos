@@ -35,7 +35,7 @@ in
   # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # --> Option (2): Install a specific kernel version from the NixOS channel
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_14);
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_15);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
   # There are currently two options for the kernel parameters:
@@ -85,6 +85,7 @@ in
   services.tailscale.enable = true;
 
   # Enable auto-cpufreq service
+  services.tlp.enable = false;
   services.power-profiles-daemon.enable = false;
   services.auto-cpufreq.enable = true;
 
