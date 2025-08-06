@@ -332,6 +332,7 @@ in
       neofetch
       netscanner
       pastel
+      qrencode
       ripgrep
       ripgrep-all
       rm-improved
