@@ -112,6 +112,7 @@ in
     quarto-with-custom-python-packages
     neovim-with-custom-python-packages
     unstable.ast-grep
+    unstable.auto-cpufreq
     unstable.cargo
     unstable.copilot-language-server
     unstable.deskflow
