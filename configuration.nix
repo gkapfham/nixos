@@ -87,7 +87,19 @@ in
   # Enable auto-cpufreq service
   services.tlp.enable = false;
   services.power-profiles-daemon.enable = false;
-  services.auto-cpufreq.enable = true;
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      battery = {
+         governor = "powersave";
+         turbo = "never";
+      };
+      charger = {
+         governor = "performance";
+         turbo = "auto";
+      };
+    };
+  };
 
   # Although the iwd backend is suggested for
   # stability, it may not enable the wireless
