@@ -356,12 +356,13 @@ in
       # browsers
       brave
       chromium
-      weylus
       discord
       firefox
+      floorp
       lynx
       qutebrowser
       w3m
+      weylus
       # desktop
       clipmenu
       dmenu
@@ -530,6 +531,7 @@ in
     xorg.xev
     xorg.xinit
     xorg.xrdb
+    xorg.xwininfo
     zlib
     zip
     xsel
