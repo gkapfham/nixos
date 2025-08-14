@@ -519,6 +519,7 @@ in
     tree
     unar
     upower
+    wirelesstools
     wavemon
     wget
     wmctrl
