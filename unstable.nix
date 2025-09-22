@@ -122,8 +122,10 @@ in
     unstable.fzy
     unstable.i3status
     unstable.jupyter
+    unstable.opencode
     unstable.poetry
     unstable.poppler
+    unstable.pyrefly
     unstable.tree-sitter
     unstable.ruff
     unstable.rustc
