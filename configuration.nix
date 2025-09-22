@@ -35,7 +35,7 @@ in
   # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # --> Option (2): Install a specific kernel version from the NixOS channel
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_15);
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_16);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
 
