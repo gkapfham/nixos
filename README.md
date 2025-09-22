@@ -1,17 +1,9 @@
 # 📘 Framework 13 AMD Laptop NixOS Configuration
 
-Welcome to the NixOS configuration repository for the Framework 13 AMD laptop!
-This repository provides a comprehensive and reproducible setup for running
-NixOS on the Framework 13 AMD model. Inside, you will find detailed
-configuration files for hardware support, bootloader, kernel, power management,
-networking, localization, and user environments. The repository also includes
-customizations for the X11 windowing system, input devices, sound, Bluetooth,
-printing, fonts, and security. Additionally, it features curated lists of
-system packages, development tools, language servers, and unstable packages
-such as Python 3.12 and Neovim, all tailored for optimal performance and
-usability on this laptop. Whether you are setting up your device for the first
-time or looking to customize your NixOS experience, this repository offers a
-solid foundation and useful examples.
+This repository contains a reproducible NixOS setup for the Framework 13 AMD
+laptop. It includes hardware support, system configuration, and customizations
+for optimal performance and usability. Use this as a starting point or reference
+for your own NixOS installation on this device.
 
 ## 📑 Table of Contents
 
