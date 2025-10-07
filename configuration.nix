@@ -382,8 +382,6 @@ in
       mise
       # editors
       universal-ctags
-      # databases
-      duckdb
       # mail
       aerc
       gettext
