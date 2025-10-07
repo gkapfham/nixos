@@ -120,6 +120,7 @@ in
     unstable.harper
     unstable.fzf
     unstable.fzy
+    unstable.gemini-cli
     unstable.i3status
     unstable.jupyter
     unstable.opencode
@@ -133,6 +134,7 @@ in
     unstable.uv
     unstable.ty
     unstable.picom
+    unstable.zuban
     unstable.zoxide
   ];
 
