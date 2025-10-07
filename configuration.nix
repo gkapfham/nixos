@@ -547,7 +547,6 @@ in
     luajitPackages.tiktoken_core
     nodejs_22
     pipx
-    # poetry
     prettierd
     R
     zulu
@@ -557,7 +556,6 @@ in
     marksman
     pyright
     nil
-    # ruff-lsp; moved to unstable
     rust-analyzer
     statix
     vscode-langservers-extracted
