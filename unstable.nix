@@ -121,6 +121,7 @@ in
     unstable.fzf
     unstable.fzy
     unstable.gemini-cli
+    unstable.github-copilot-cli
     unstable.i3status
     unstable.jupyter
     unstable.opencode
