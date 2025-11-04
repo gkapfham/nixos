@@ -55,6 +55,7 @@ let
     pyperclip
     python-dotenv
     pyudev
+    pylatexenc
     pyyaml
     requests
     rich
@@ -95,6 +96,7 @@ let
       nbformat
       plotly
       pnglatex
+      pylatexenc
       pynvim
       pyperclip
       rich
@@ -111,10 +113,12 @@ in
     python-with-custom-packages
     quarto-with-custom-python-packages
     neovim-with-custom-python-packages
+    unstable.amp-cli
     unstable.ast-grep
     unstable.auto-cpufreq
     unstable.cargo
     unstable.copilot-language-server
+    unstable.crush
     unstable.deskflow
     unstable.decktape
     unstable.harper
@@ -135,7 +139,7 @@ in
     unstable.uv
     unstable.ty
     unstable.picom
-    unstable.zuban
+    # unstable.zuban
     unstable.zoxide
   ];
 
