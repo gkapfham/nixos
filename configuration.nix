@@ -35,7 +35,7 @@ in
   # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # --> Option (2): Install a specific kernel version from the NixOS channel
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_16);
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_17);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
 
@@ -324,6 +324,7 @@ in
       kitty
       # cli
       abook
+      age
       bat
       bluetuith
       bmon
@@ -347,6 +348,7 @@ in
       ripgrep
       ripgrep-all
       rm-improved
+      sops
       systemctl-tui
       tealdeer
       tmuxinator
@@ -552,6 +554,7 @@ in
     zulu
     # language servers
     gopls
+    htmx-lsp
     lua-language-server
     marksman
     pyright
