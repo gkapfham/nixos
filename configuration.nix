@@ -489,6 +489,7 @@ in
     microcode-amd
     manix
     mdcat
+    mermaid-cli
     mdl
     networkmanagerapplet
     nix-search-cli
