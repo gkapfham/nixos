@@ -321,6 +321,7 @@ in
       # terminal
       alacritty
       gnome-terminal
+      ghostty
       kitty
       # cli
       abook
