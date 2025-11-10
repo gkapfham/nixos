@@ -140,6 +140,7 @@ in
     unstable.ty
     unstable.picom
     # unstable.zuban
+    unstable.zellij
     unstable.zoxide
   ];
 
