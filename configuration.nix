@@ -326,6 +326,7 @@ in
       # cli
       abook
       age
+      argyllcms
       bat
       bluetuith
       bmon
