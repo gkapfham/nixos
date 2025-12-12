@@ -60,7 +60,7 @@ let
     requests
     rich
     rjsmin
-    systemd
+    systemd-python
   ];
 
   # use the unstable version of Python
@@ -122,6 +122,7 @@ in
     unstable.deskflow
     unstable.decktape
     unstable.harper
+    unstable.framework-tool-tui
     unstable.fzf
     unstable.fzy
     unstable.gemini-cli
@@ -137,9 +138,9 @@ in
     unstable.rustc
     unstable.rustfmt
     unstable.uv
+    unstable.treemd
     unstable.ty
     unstable.picom
-    # unstable.zuban
     unstable.zellij
     unstable.zoxide
   ];
