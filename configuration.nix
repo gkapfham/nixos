@@ -368,6 +368,7 @@ in
       w3m
       weylus
       # desktop
+      autotiling
       clipmenu
       dmenu
       dunst
@@ -453,6 +454,7 @@ in
     dua
     du-dust
     evince
+    framework-tool
     gcc
     gcc-unwrapped
     ghostscript
