@@ -13,15 +13,14 @@ in
 {
 
   # Load other configuration files
-  imports =
-    [
-      # Add customized configuration for Framework 13 AMD laptop
-      <nixos-hardware/framework/13-inch/7040-amd>
-      # Include the results of the hardware scan
-      ./hardware-configuration.nix
-      # Include the unstable packages from unstable channel
-      ./unstable.nix
-    ];
+  imports = [
+    # Add customized configuration for Framework 13 AMD laptop
+    <nixos-hardware/framework/13-inch/7040-amd>
+    # Include the results of the hardware scan
+    ./hardware-configuration.nix
+    # Include the unstable packages from unstable channel
+    ./unstable.nix
+  ];
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
@@ -41,7 +40,11 @@ in
 
   # Use minimal kernel parameters, including one that turns off ASPM,
   # which seems to enable suspend to work on the Framework 13 AMD laptop when using a dock
-  boot.kernelParams = [ "mem_sleep_default=s2idle" "amdgpu.dcdebugmask=0x10" "pcie_aspm=off" ];
+  boot.kernelParams = [
+    "mem_sleep_default=s2idle"
+    "amdgpu.dcdebugmask=0x10"
+    "pcie_aspm=off"
+  ];
 
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
@@ -58,7 +61,7 @@ in
   # be the lightdm user when the system is booting
   # or, otherwise, the user that is logged in
   services.devmon.enable = true;
-  services.gvfs.enable = true; 
+  services.gvfs.enable = true;
   services.udisks2.enable = true;
 
   # Define the hostname
@@ -69,7 +72,7 @@ in
 
   # Disable the firewall so that other
   # services can connect to localhost
-  networking.firewall.enable = false; 
+  networking.firewall.enable = false;
 
   # Automatically set the regulatory domain for
   # the wireless network card
@@ -90,12 +93,12 @@ in
     enable = true;
     settings = {
       battery = {
-         governor = "powersave";
-         turbo = "never";
+        governor = "powersave";
+        turbo = "never";
       };
       charger = {
-         governor = "performance";
-         turbo = "auto";
+        governor = "performance";
+        turbo = "auto";
       };
     };
   };
@@ -103,7 +106,7 @@ in
   # Although the iwd backend is suggested for
   # stability, it may not enable the wireless
   # network to resume after a sleep and the
-  # network daemon may not always connect. 
+  # network daemon may not always connect.
   # networking.wireless.iwd.enable = true;
   # networking.networkmanager.wifi.backend = "iwd";
 
@@ -166,67 +169,67 @@ in
   # Reconfigure how NixOS requests the fingerprint
   security.pam.services.gdm-fingerprint = lib.mkIf (config.services.fprintd.enable) {
     text = ''
-        auth       required                    pam_shells.so
-        auth       requisite                   pam_nologin.so
-        auth       requisite                   pam_faillock.so      preauth
-        auth       required                    ${pkgs.fprintd}/lib/security/pam_fprintd.so
-        auth       optional                    pam_permit.so
-        auth       required                    pam_env.so
-        auth       [success=ok default=1]      ${pkgs.gdm}/lib/security/pam_gdm.so
-        auth       optional                    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so
+      auth       required                    pam_shells.so
+      auth       requisite                   pam_nologin.so
+      auth       requisite                   pam_faillock.so      preauth
+      auth       required                    ${pkgs.fprintd}/lib/security/pam_fprintd.so
+      auth       optional                    pam_permit.so
+      auth       required                    pam_env.so
+      auth       [success=ok default=1]      ${pkgs.gdm}/lib/security/pam_gdm.so
+      auth       optional                    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so
 
-        account    include                     login
+      account    include                     login
 
-        password   required                    pam_deny.so
+      password   required                    pam_deny.so
 
-        session    include                     login
-        session    optional                    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
-      '';
-    };
+      session    include                     login
+      session    optional                    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
+    '';
+  };
 
   # Configure the display manager; note that this displays
   # a small box for an input password in the center of the
   # screen. The current implementation seems to ignore the
   # show-sys-info parameter, the likes of which are not visible
   services.xserver.displayManager.lightdm.greeters.mini = {
-            enable = true;
-            user = "gkapfham";
-            extraConfig = ''
-                [greeter]
-                show-password-label = true
-                password-alignment = left
-                password-input-width = 20
-                password-label-text =  Password
-                invalid-password-text = 󰋮 Invalid Password
-                show-sys-info = true
-                [greeter-hotkeys]
-                # "alt", "control" or "meta"
-                # meta is the windows/super key
-                mod-key = meta
-                # power management shortcuts (single-key, case-sensitive)
-                shutdown-key = p
-                restart-key = r
-                hibernate-key = h
-                suspend-key = s
-                # cycle through available sessions
-                session-key = e
-                [greeter-theme]
-                text-color = "#1c1c1c"
-                font-size = 1.1em
-                window-color = "#875f87"
-                background-image = ""
-                background-color = "#875f87"
-                border-color = "#875f87"
-                border-width = 2px
-                layout-space = 15
-                password-color = "#a8a8a8"
-                password-background-color = "#1B1D1E"
-                password-border-color = "#875f87"
-                password-border-width = 2px
-                sys-info-font-size = 1.1em
-                sys-info-color = "#1c1c1c"
-            '';
-        };
+    enable = true;
+    user = "gkapfham";
+    extraConfig = ''
+      [greeter]
+      show-password-label = true
+      password-alignment = left
+      password-input-width = 20
+      password-label-text =  Password
+      invalid-password-text = 󰋮 Invalid Password
+      show-sys-info = true
+      [greeter-hotkeys]
+      # "alt", "control" or "meta"
+      # meta is the windows/super key
+      mod-key = meta
+      # power management shortcuts (single-key, case-sensitive)
+      shutdown-key = p
+      restart-key = r
+      hibernate-key = h
+      suspend-key = s
+      # cycle through available sessions
+      session-key = e
+      [greeter-theme]
+      text-color = "#1c1c1c"
+      font-size = 1.1em
+      window-color = "#875f87"
+      background-image = ""
+      background-color = "#875f87"
+      border-color = "#875f87"
+      border-width = 2px
+      layout-space = 15
+      password-color = "#a8a8a8"
+      password-background-color = "#1B1D1E"
+      password-border-color = "#875f87"
+      password-border-width = 2px
+      sys-info-font-size = 1.1em
+      sys-info-color = "#1c1c1c"
+    '';
+  };
 
   # Use light for controlling the backlight; see
   # the i3 configuration for more details on
@@ -292,8 +295,7 @@ in
   # a theme for programs like deskflow
   # that use QT
   environment.sessionVariables = {
-    QT_QPA_PLATFORMTHEME="gtk3";
-
+    QT_QPA_PLATFORMTHEME = "gtk3";
   };
 
   # Enable nix-ld so that it is possible
@@ -316,7 +318,12 @@ in
   users.users.gkapfham = {
     isNormalUser = true;
     description = "Gregory M. Kapfhammer";
-    extraGroups = [ "networkmanager" "wheel" "video" "input" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "input"
+    ];
     packages = with pkgs; [
       # terminal
       alacritty
@@ -341,7 +348,9 @@ in
       flyctl
       gum
       imagemagick
+      luaformatter
       lesspipe
+      mdformat
       miniserve
       neofetch
       netscanner
@@ -351,6 +360,7 @@ in
       ripgrep-all
       rm-improved
       sops
+      stylua
       systemctl-tui
       tealdeer
       tmuxinator
@@ -438,8 +448,7 @@ in
   # List packages installed in system profile
   # System Packages: install programs that are
   # available to all users on the laptop
-  environment.systemPackages = with pkgs;
-   [
+  environment.systemPackages = with pkgs; [
     # tools and libraries
     acpi
     arandr
@@ -568,7 +577,7 @@ in
     statix
     vscode-langservers-extracted
     yaml-language-server
-];
+  ];
 
   # Define the environment variables for the system
   # so that the sqlite3 library is available to programs
