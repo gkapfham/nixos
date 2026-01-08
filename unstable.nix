@@ -19,8 +19,10 @@
 { config, pkgs, ... }:
 
 let
-  baseconfig = { allowUnfree = true; };
-  unstable = import <nixos-unstable> { config =  baseconfig; };
+  baseconfig = {
+    allowUnfree = true;
+  };
+  unstable = import <nixos-unstable> { config = baseconfig; };
 
   # permit the installation of a program that has a known security
   # vulnerability in the current version; note that this is required
@@ -31,37 +33,38 @@ let
 
   # define the Python packages that should always be available
   # inside of both system-wide Python and Quarto
-  default-python-packages = python-packages: with python-packages; [
-    bibtexparser
-    cairosvg
-    cryptography
-    csscompressor
-    distro
-    htmlmin
-    ipython
-    ipykernel
-    jupyter-client
-    jupyterlab
-    jupyterlab-git
-    pillow
-    pip
-    pipx
-    plotly
-    pnglatex
-    poetry-core
-    prompt-toolkit
-    pydocstyle
-    pynvim
-    pyperclip
-    python-dotenv
-    pyudev
-    pylatexenc
-    pyyaml
-    requests
-    rich
-    rjsmin
-    systemd-python
-  ];
+  default-python-packages =
+    python-packages: with python-packages; [
+      bibtexparser
+      cairosvg
+      cryptography
+      csscompressor
+      distro
+      htmlmin
+      ipython
+      ipykernel
+      jupyter-client
+      jupyterlab
+      jupyterlab-git
+      pillow
+      pip
+      pipx
+      plotly
+      pnglatex
+      poetry-core
+      prompt-toolkit
+      pydocstyle
+      pynvim
+      pyperclip
+      python-dotenv
+      pyudev
+      pylatexenc
+      pyyaml
+      requests
+      rich
+      rjsmin
+      systemd-python
+    ];
 
   # use the unstable version of Python
   # with all of the custom packages defined
@@ -84,29 +87,31 @@ let
   # NOTE: temporarily stop using the unstable version
   # of neovim until plugins start to support 0.11.0
   neovim-with-custom-python-packages = unstable.neovim.override {
-    extraLuaPackages = p: with p; [
-      magick
-     ];
-    extraPython3Packages = p: with p; [
-      cairosvg
-      cryptography
-      ipython
-      ipykernel
-      jupyter-client
-      nbformat
-      plotly
-      pnglatex
-      pylatexenc
-      pynvim
-      pyperclip
-      rich
-    ];
+    extraLuaPackages =
+      p: with p; [
+        magick
+      ];
+    extraPython3Packages =
+      p: with p; [
+        cairosvg
+        cryptography
+        ipython
+        ipykernel
+        jupyter-client
+        nbformat
+        plotly
+        pnglatex
+        pylatexenc
+        pynvim
+        pyperclip
+        rich
+      ];
   };
 
 in
 {
 
-  # define the unstable (and specially configured) 
+  # define the unstable (and specially configured)
   # system packages that are available to all users
   # environment.systemPackages = with pkgs; [
   environment.systemPackages = [
@@ -116,6 +121,7 @@ in
     unstable.amp-cli
     unstable.ast-grep
     unstable.auto-cpufreq
+    unstable.basedpyright
     unstable.cargo
     unstable.copilot-language-server
     unstable.crush
@@ -129,7 +135,9 @@ in
     unstable.github-copilot-cli
     unstable.i3status
     unstable.jupyter
+    unstable.nixfmt
     unstable.opencode
+    unstable.picom
     unstable.poetry
     unstable.poppler
     unstable.pyrefly
@@ -140,9 +148,9 @@ in
     unstable.uv
     unstable.treemd
     unstable.ty
-    unstable.picom
     unstable.zellij
     unstable.zoxide
+    unstable.zuban
   ];
 
   nixpkgs.config.packageOverrides = pkgs: {
