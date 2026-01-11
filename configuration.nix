@@ -187,52 +187,36 @@ in
     '';
   };
 
-  # Configure the display manager; note that this displays
-  # a small box for an input password in the center of the
-  # screen. The current implementation seems to ignore the
-  # show-sys-info parameter, the likes of which are not visible
-  services.xserver.displayManager.lightdm.greeters.mini = {
+  # Configure LightDM with GTK Greeter
+  # Using GTK greeter instead of slick since slick has background image issues
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.lightdm.background = ./media/wallpaper.png;
+  services.xserver.displayManager.lightdm.greeters.gtk = {
     enable = true;
-    user = "gkapfham";
+    theme.name = "Adwaita-dark";
+    iconTheme.name = "Adwaita";
+    cursorTheme = {
+      name = "phinger-cursors-dark";
+      size = 48;
+    };
+    indicators = [
+      "~host"
+      "~spacer"
+      "~clock"
+      "~spacer"
+      "~session"
+      "~language"
+      "~a11y"
+      "~power"
+    ];
     extraConfig = ''
-      [greeter]
-      show-password-label = true
-      password-alignment = left
-      password-input-width = 20
-      password-label-text =  Password
-      invalid-password-text = 󰋮 Invalid Password
-      show-sys-info = true
-      [greeter-hotkeys]
-      # "alt", "control" or "meta"
-      # meta is the windows/super key
-      mod-key = meta
-      # power management shortcuts (single-key, case-sensitive)
-      shutdown-key = p
-      restart-key = r
-      hibernate-key = h
-      suspend-key = s
-      # cycle through available sessions
-      session-key = e
-      [greeter-theme]
-      # text-color = "#1c1c1c"
-      text-color = "#a8a8a8"
-      font-size = 1.1em
-      window-color = "#875f87"
-      background-image = "${/home/gkapfham/media/images/wallpaper/Honeycomb_Mac.png}"
-      # background-color = "#875f87"
-      border-color = "#875f87"
-      border-width = 20px
-      layout-space = 15
-      password-color = "#a8a8a8"
-      # password-background-color = "#1B1D1E"
-      password-background-color = "#1C1C1C"
-      password-border-color = "#875f87"
-      password-border-width = 20px
-      sys-info-font-size = 1.1em
-      # sys-info-color = "#1c1c1c"
-      sys-info-color = "#a8a8a8"
+      font-name=Maple Mono NF
+      xft-dpi=192
     '';
   };
+
+  # Set cursor size environment variable for display manager
+  systemd.services.display-manager.environment.XCURSOR_SIZE = "48";
 
   # Use light for controlling the backlight; see
   # the i3 configuration for more details on
