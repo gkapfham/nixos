@@ -199,7 +199,7 @@ in
       show-password-label = true
       password-alignment = left
       password-input-width = 20
-      password-label-text =  Password
+      password-label-text =  Password
       invalid-password-text = 󰋮 Invalid Password
       show-sys-info = true
       [greeter-hotkeys]
@@ -214,20 +214,22 @@ in
       # cycle through available sessions
       session-key = e
       [greeter-theme]
-      text-color = "#1c1c1c"
+      # text-color = "#1c1c1c"
+      text-color = "#a8a8a8"
       font-size = 1.1em
       window-color = "#875f87"
-      background-image = ""
-      background-color = "#875f87"
+      background-image = "${/home/gkapfham/media/images/wallpaper/Honeycomb_Mac.png}"
+      # background-color = "#875f87"
       border-color = "#875f87"
-      border-width = 2px
+      border-width = 20px
       layout-space = 15
       password-color = "#a8a8a8"
       password-background-color = "#1B1D1E"
       password-border-color = "#875f87"
-      password-border-width = 2px
+      password-border-width = 20px
       sys-info-font-size = 1.1em
-      sys-info-color = "#1c1c1c"
+      # sys-info-color = "#1c1c1c"
+      sys-info-color = "#a8a8a8"
     '';
   };
 
