@@ -224,7 +224,8 @@ in
       border-width = 20px
       layout-space = 15
       password-color = "#a8a8a8"
-      password-background-color = "#1B1D1E"
+      # password-background-color = "#1B1D1E"
+      password-background-color = "#1C1C1C"
       password-border-color = "#875f87"
       password-border-width = 20px
       sys-info-font-size = 1.1em
