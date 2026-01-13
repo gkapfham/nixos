@@ -150,7 +150,6 @@ in
     unstable.ty
     unstable.zellij
     unstable.zoxide
-    unstable.zuban
   ];
 
   nixpkgs.config.packageOverrides = pkgs: {
