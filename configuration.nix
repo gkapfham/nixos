@@ -82,9 +82,10 @@ in
   # they are not used and consume extra battery
   hardware.sensor.iio.enable = false;
 
-  # Enable tailscale by default; note that this
+  # Enable netbird and/or tailscale by default; note that this
   # installs the cli-based program and runs the daemon
-  services.tailscale.enable = true;
+  services.netbird.enable = true;
+  # services.tailscale.enable = true;
 
   # Enable auto-cpufreq service
   services.tlp.enable = false;
@@ -491,6 +492,7 @@ in
     mdcat
     mermaid-cli
     mdl
+    netbird-ui
     networkmanagerapplet
     nix-search-cli
     nix-tree
