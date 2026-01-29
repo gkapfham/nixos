@@ -604,6 +604,9 @@ in
   # Enable the ssh agent
   programs.ssh.startAgent = true;
 
+  # Enable the SSH server daemon
+  services.openssh.enable = true;
+
   # Enable the Gnome keyring
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;
