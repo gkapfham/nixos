@@ -414,6 +414,7 @@ in
       pkg-config
       powerstat
       powertop
+      qpdf
       starship
       stow
       stress-ng
