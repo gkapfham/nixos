@@ -34,7 +34,7 @@ in
   # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # --> Option (2): Install a specific kernel version from the NixOS channel
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_17);
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_18);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
 
@@ -51,9 +51,9 @@ in
   # --> when running on battery power
   # --> when connected to external power
   # --> when connected to a dock that has external power
-  services.logind.lidSwitch = "suspend";
-  services.logind.lidSwitchExternalPower = "suspend";
-  services.logind.lidSwitchDocked = "suspend";
+  services.logind.settings.Login.HandleLidSwitch = "suspend";
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "suspend";
+  services.logind.settings.Login.HandleLidSwitchDocked = "suspend";
 
   # Configure the automatic mounting of external
   # USB drives; note that they are mounted according
@@ -137,13 +137,13 @@ in
   hardware.graphics.enable = true;
 
   # Do not use wayland
-  services.xserver.displayManager.gdm.wayland = false;
+  services.displayManager.gdm.wayland = false;
 
   # Disable the GNOME Desktop Environment
-  services.xserver.desktopManager.gnome.enable = false;
+  services.desktopManager.gnome.enable = false;
 
   # Disable the GNOME Desktop Manager that is for login
-  services.xserver.displayManager.gdm.enable = false;
+  services.displayManager.gdm.enable = false;
 
   # Enable i3
   services.displayManager.defaultSession = "none+i3";
@@ -360,7 +360,6 @@ in
       chromium
       discord
       firefox
-      floorp
       lynx
       qutebrowser
       w3m
@@ -450,7 +449,7 @@ in
     csvlens
     curl
     dua
-    du-dust
+    dust
     evince
     framework-tool
     gcc
@@ -506,12 +505,13 @@ in
     pinentry-all
     pngquant
     poppler
-    poppler_utils
+    poppler-utils
     pulseaudioFull
     procs
     pstree
     rclone
     rng-tools
+    rumdl
     sct
     sesh
     sqlite
@@ -611,6 +611,9 @@ in
   # Enable the Gnome keyring
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;
+
+  # Disable the Gnome agent since I do not use Gnome
+  services.gnome.gcr-ssh-agent.enable = false;
 
   # Configure automatic garbage collection for NixOS state;
   # this controls the number of generations that are kept
