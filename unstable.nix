@@ -69,7 +69,7 @@ let
   # use the unstable version of Python
   # with all of the custom packages defined
   # by the default-python-packages variable
-  python-with-custom-packages = unstable.python312.withPackages default-python-packages;
+  python-with-custom-packages = unstable.python314.withPackages default-python-packages;
 
   # use the unstable version of Quarto
   # with all of the custom packages defined
