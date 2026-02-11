@@ -327,6 +327,7 @@ in
       bmon
       borgbackup
       borgmatic
+      bun
       cloc
       croc
       dig
