@@ -409,6 +409,7 @@ in
       ijq
       jless
       jq
+      mkcert
       mupdf
       pandoc
       pkg-config
@@ -467,6 +468,7 @@ in
     lxappearance
     i3
     i3lock-fancy-rapid
+    betterlockscreen
     iw
     iwd
     file
@@ -500,6 +502,8 @@ in
     nmap
     numlockx
     nvme-cli
+    openssl
+    openssl.dev
     pavucontrol
     pciutils
     phinger-cursors
@@ -525,6 +529,7 @@ in
     unar
     upower
     wirelesstools
+    wiremix
     wavemon
     wget
     wmctrl
@@ -574,6 +579,9 @@ in
   # so that the sqlite3 library is available to programs
   environment.variables = {
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
+    OPENSSL_DIR = "${pkgs.openssl.dev}";
+    OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
+    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
   };
 
   # Enable update of the firmware through Linux
