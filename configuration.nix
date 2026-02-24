@@ -340,6 +340,7 @@ in
       luaformatter
       lesspipe
       mdformat
+      mdserve
       miniserve
       neofetch
       netscanner
