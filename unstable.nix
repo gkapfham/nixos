@@ -122,7 +122,6 @@ in
     unstable.ast-grep
     unstable.auto-cpufreq
     unstable.basedpyright
-    unstable.cargo
     unstable.copilot-language-server
     unstable.crush
     unstable.deskflow
@@ -143,8 +142,7 @@ in
     unstable.pyrefly
     unstable.tree-sitter
     unstable.ruff
-    unstable.rustc
-    unstable.rustfmt
+    unstable.rustup
     unstable.uv
     unstable.treemd
     unstable.ty
