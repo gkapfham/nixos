@@ -46,6 +46,8 @@ let
       jupyter-client
       jupyterlab
       jupyterlab-git
+      mdformat
+      mdformat-frontmatter
       pillow
       pip
       pipx
