@@ -87,6 +87,10 @@ in
   services.netbird.enable = true;
   # services.tailscale.enable = true;
 
+  # Allow SSH server on this netbird peer so that
+  # other peers can connect via `netbird ssh`
+  systemd.services.netbird.environment.NB_ALLOW_SERVER_SSH = "true";
+
   # Enable auto-cpufreq service
   services.tlp.enable = false;
   services.power-profiles-daemon.enable = false;
@@ -339,7 +343,6 @@ in
       imagemagick
       luaformatter
       lesspipe
-      mdformat
       mdserve
       miniserve
       neofetch
@@ -553,8 +556,6 @@ in
     zsh-autocomplete
     # programming
     android-tools
-    # cargo
-    clippy
     go
     lua5_3_compat
     luajitPackages.tiktoken_core
@@ -570,7 +571,6 @@ in
     marksman
     pyright
     nil
-    rust-analyzer
     statix
     vscode-langservers-extracted
     yaml-language-server
