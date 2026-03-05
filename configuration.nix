@@ -347,6 +347,7 @@ in
       miniserve
       neofetch
       netscanner
+      nix-search-tv
       pastel
       qrencode
       ripgrep
