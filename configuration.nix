@@ -332,6 +332,7 @@ in
       borgbackup
       borgmatic
       bun
+      clipboard-jh
       cloc
       croc
       dig
@@ -341,8 +342,8 @@ in
       flyctl
       gum
       imagemagick
-      luaformatter
       lesspipe
+      luaformatter
       mdserve
       miniserve
       neofetch
