@@ -342,6 +342,7 @@ in
       flyctl
       gum
       imagemagick
+      immich-go
       lesspipe
       luaformatter
       mdserve
