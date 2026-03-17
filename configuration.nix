@@ -36,6 +36,18 @@ in
   # --> Option (2): Install a specific kernel version from the NixOS channel
   boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_18);
 
+  # Use a ramdisk for /tmp to improve performance of temporary files
+  boot.tmp.useTmpfs = true;
+  boot.tmp.tmpfsSize = "20G";
+
+  # Use a ramdisk for browser profiles and cache
+  # but sync the cache to disk every 10 minutes
+  # so as to prevent data loss from memory
+  services.psd = {
+    enable = true;
+    resyncTimer = "10m"; # Sync to disk every 10 minutes
+  };
+
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
 
   # Use minimal kernel parameters, including one that turns off ASPM,
