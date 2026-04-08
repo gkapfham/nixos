@@ -469,6 +469,7 @@ in
     bottom
     csvlens
     curl
+    delta
     dua
     dust
     evince
@@ -578,6 +579,7 @@ in
     pipx
     prettierd
     R
+    zig
     zulu
     # language servers
     gopls
