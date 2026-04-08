@@ -44,8 +44,8 @@ let
       ipython
       ipykernel
       jupyter-client
-      jupyterlab
-      jupyterlab-git
+      # jupyterlab
+      # jupyterlab-git
       mdformat
       mdformat-frontmatter
       pillow
@@ -124,6 +124,7 @@ in
     unstable.ast-grep
     unstable.auto-cpufreq
     unstable.basedpyright
+    unstable.dwt1-shell-color-scripts
     unstable.copilot-language-server
     unstable.crush
     unstable.deskflow
@@ -134,6 +135,8 @@ in
     unstable.fzy
     unstable.gemini-cli
     unstable.github-copilot-cli
+    unstable.google-cloud-sdk
+    unstable.gws
     unstable.i3status
     unstable.jupyter
     unstable.nixfmt
