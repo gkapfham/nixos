@@ -24,6 +24,36 @@ let
   };
   unstable = import <nixos-unstable> { config = baseconfig; };
 
+  # pin a newer tree-sitter CLI until nixos-unstable catches up.
+  # keep this as a separate package identity so it does not override
+  # nixpkgs' tree-sitter library package for other derivations.
+  tree-sitter-latest = pkgs.stdenvNoCC.mkDerivation {
+    pname = "tree-sitter-cli-latest";
+    version = "0.26.8";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.8/tree-sitter-cli-linux-x64.zip";
+      sha256 = "sha256-k3fYNHnujgXc59K1FEIIfH/dYgAVg0wk/qGobUvQqFs=";
+    };
+
+    nativeBuildInputs = [ pkgs.unzip ];
+
+    dontUnpack = true;
+    dontConfigure = true;
+    dontBuild = true;
+
+    installPhase = ''
+      mkdir -p $out/bin
+      unzip "$src"
+      install -m755 tree-sitter $out/bin/tree-sitter
+    '';
+
+    meta = with pkgs.lib; {
+      mainProgram = "tree-sitter";
+      platforms = [ "x86_64-linux" ];
+    };
+  };
+
   # permit the installation of a program that has a known security
   # vulnerability in the current version; note that this is required
   # otherwise it is not possible to install the package
