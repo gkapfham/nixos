@@ -653,6 +653,14 @@ in
     randomizedDelaySec = "1 hour";
   };
 
+  # Enable experimental features for nix-command and flakes support;
+  # this allows the use of 'nix profile install' commands without
+  # converting the entire system to use flakes
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
