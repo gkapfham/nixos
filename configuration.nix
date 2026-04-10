@@ -179,15 +179,11 @@ in
   # Enable the fingerprint reader
   services.fprintd.enable = true;
 
-  # Enable the i3lock screen locker
-  # to use Pam and thus the fingerprint
-  # reader for authentication (note that
-  # this changed on a recent NixOS release;
-  # look in /etc/pam.d/i3lock for the symlink
-  # and if it does not exist then this suggests
-  # that using a fingerprint with i3lock is
-  # not correctly configured)
-  programs.i3lock.enable = true;
+  # Enable PAM for i3lock so that the fingerprint
+  # reader works for authentication; note that
+  # programs.i3lock.enable is not used because
+  # i3lock-fancy-rapid already provides i3lock
+  # and enabling both causes a collision
   security.pam.services.i3lock.enable = true;
 
   # Enable authentication with the fingerprint
@@ -498,8 +494,7 @@ in
     linuxKernel.packages.linux_zen.cpupower
     lm_sensors
     lxappearance
-    i3
-    i3lock-fancy-rapid
+    # i3lock-fancy-rapid
     betterlockscreen
     iw
     iwd
@@ -527,7 +522,6 @@ in
     mdcat
     mermaid-cli
     mdl
-    netbird-ui
     networkmanagerapplet
     nix-search-cli
     nix-tree
