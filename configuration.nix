@@ -165,7 +165,14 @@ in
 
   # Enable i3
   services.displayManager.defaultSession = "none+i3";
-  services.xserver.windowManager.i3.enable = true;
+  services.xserver.windowManager.i3 = {
+    enable = true;
+    package = pkgs.unstable.i3;
+    extraPackages = with pkgs; [
+      unstable.i3status
+      dmenu
+    ];
+  };
 
   # Enable the fingerprint reader
   services.fprintd.enable = true;
