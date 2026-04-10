@@ -163,7 +163,9 @@ in
   # Disable the GNOME Desktop Manager that is for login
   services.displayManager.gdm.enable = false;
 
-  # Enable i3
+  # Enable i3, using the unstable version for the i3 package
+  # and its extra packages (i3status, dmenu) to avoid collisions
+  # between stable and unstable versions of these packages
   services.displayManager.defaultSession = "none+i3";
   services.xserver.windowManager.i3 = {
     enable = true;
