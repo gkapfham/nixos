@@ -483,7 +483,6 @@ in
     ghostscript
     gnumake
     highlight-pointer
-    killall
     lazygit
     libinput-gestures
     linux-firmware
@@ -533,8 +532,6 @@ in
     phinger-cursors
     pinentry-all
     pngquant
-    poppler
-    poppler-utils
     pulseaudioFull
     procs
     pstree
@@ -581,7 +578,6 @@ in
     lua5_3_compat
     luajitPackages.tiktoken_core
     nodejs_22
-    pipx
     prettierd
     R
     zig
