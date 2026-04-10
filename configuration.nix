@@ -566,6 +566,7 @@ in
     zlib
     zip
     xsel
+    zellij
     zenith
     zk
     zsh
