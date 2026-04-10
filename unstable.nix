@@ -166,7 +166,7 @@ in
     unstable.github-copilot-cli
     unstable.google-cloud-sdk
     unstable.gws
-    unstable.jupyter
+    # unstable.jupyter
     unstable.i3status
     unstable.nixfmt
     unstable.opencode
