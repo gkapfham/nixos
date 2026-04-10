@@ -94,9 +94,11 @@ in
   # they are not used and consume extra battery
   hardware.sensor.iio.enable = false;
 
-  # Enable netbird and/or tailscale by default; note that this
+  # Enable netbird tailscale by default; note that this
   # installs the cli-based program and runs the daemon
   services.netbird.enable = true;
+
+  # Currently disable the use of tailscale
   # services.tailscale.enable = true;
 
   # Allow SSH server on this netbird peer so that
