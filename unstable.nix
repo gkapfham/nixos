@@ -74,8 +74,7 @@ let
       ipython
       ipykernel
       jupyter-client
-      # jupyterlab
-      # jupyterlab-git
+      jupyterlab
       mdformat
       mdformat-frontmatter
       pillow
@@ -167,25 +166,25 @@ in
     unstable.github-copilot-cli
     unstable.google-cloud-sdk
     unstable.gws
-    unstable.i3status
     unstable.jupyter
+    unstable.i3status
     unstable.nixfmt
     unstable.opencode
     unstable.picom
     unstable.poetry
     unstable.poppler
     unstable.pyrefly
-    unstable.tree-sitter
+    tree-sitter-latest
     unstable.ruff
     unstable.rustup
     unstable.uv
     unstable.treemd
     unstable.ty
-    unstable.zellij
     unstable.zoxide
+    unstable.zuban
   ];
 
   nixpkgs.config.packageOverrides = pkgs: {
-    unstable = unstable;
+    inherit unstable;
   };
 }
