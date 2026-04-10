@@ -292,6 +292,8 @@ in
         i3Support = true;
         pulseSupport = true;
       };
+      # Use unstable auto-cpufreq to match Python 3.14 and avoid collision warnings
+      auto-cpufreq = (import <nixos-unstable> { }).auto-cpufreq;
     };
   };
 
