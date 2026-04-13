@@ -382,6 +382,7 @@ in
       tealdeer
       tmuxinator
       trippy
+      visidata
       yazi
       yq-go
       # browsers
