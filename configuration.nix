@@ -356,6 +356,8 @@ in
       clipboard-jh
       cloc
       croc
+      csvlens
+      csview
       dig
       eva
       eza
@@ -376,6 +378,7 @@ in
       ripgrep
       ripgrep-all
       rm-improved
+      shellcheck
       sops
       stylua
       systemctl-tui
