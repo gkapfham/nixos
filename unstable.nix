@@ -177,9 +177,11 @@ in
     tree-sitter-latest
     unstable.ruff
     unstable.rustup
-    unstable.uv
     unstable.treemd
     unstable.ty
+    unstable.uv
+    unstable.vex-tui
+    unstable.worktrunk
     unstable.zoxide
     unstable.zuban
   ];
