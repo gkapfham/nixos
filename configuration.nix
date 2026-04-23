@@ -451,6 +451,7 @@ in
       starship
       stow
       stress-ng
+      sioyek
       tokei
       unzip
       urlscan
