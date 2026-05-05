@@ -458,6 +458,7 @@ in
       vlc
       zathura
       # llms
+      llama-cpp
       ollama
     ];
   };
