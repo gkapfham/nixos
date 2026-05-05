@@ -5,6 +5,20 @@ laptop. It includes hardware support, system configuration, and customizations
 for optimal performance and usability. Use this as a starting point or reference
 for your own NixOS installation on this device.
 
+Think about the following issues before adopting this NixOS configuration:
+
+- **Hardware Compatibility**: Ensure your Framework 13 AMD laptop has the same
+  or compatible hardware components as those specified in the configuration.
+- **Security Considerations**: Review the security settings and ensure they
+  meet your requirements. Consider additional security measures if needed.
+- **Customization**: This configuration is tailored to my specific needs and
+  preferences. You may need to modify it to suit your workflow and preferences.
+- **Maintenance**: Regularly update the configuration and packages to ensure
+  security and compatibility.
+- **Backup**: Before making significant changes to your system (e.g.,
+  installing NixOS for the first time), ensure that you have backups of your data
+  and configuration files.
+
 ## 📑 Table of Contents
 
 - [📦 Imports](#-imports)
@@ -13,7 +27,7 @@ for your own NixOS installation on this device.
 - [💤 Sleep Configuration](#-sleep-configuration)
 - [🌐 Networking](#-networking)
 - [🌍 Localization](#-localization)
-- [🖥️ X11 Windowing System](#️-x11-windowing-system)
+- [🖥️ X11 Windowing System](#%EF%B8%8F-x11-windowing-system)
 - [🖱️ Input Devices](#-input-devices)
 - [🔊 Sound](#-sound)
 - [🔋 Power Management](#-power-management)
