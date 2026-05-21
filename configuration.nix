@@ -363,6 +363,8 @@ in
       croc
       csvlens
       csview
+      ddcutil
+      rwedid
       dig
       eva
       eza
@@ -372,6 +374,7 @@ in
       imagemagick
       immich-go
       lesspipe
+      lsof
       luaformatter
       mdserve
       miniserve
