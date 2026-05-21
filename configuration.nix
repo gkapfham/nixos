@@ -90,6 +90,11 @@ in
   # the wireless network card
   hardware.wirelessRegulatoryDatabase = true;
 
+  # Enable I2C support for ddcutil to control
+  # external monitor brightness and settings
+  hardware.i2c.enable = true;
+  boot.kernelModules = [ "i2c-dev" ];
+
   # Disable light sensors and accelerometers as
   # they are not used and consume extra battery
   hardware.sensor.iio.enable = false;
