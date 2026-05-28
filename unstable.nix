@@ -79,7 +79,7 @@ let
       mdformat-frontmatter
       pillow
       pip
-      pipx
+      # pipx
       plotly
       pnglatex
       poetry-core
