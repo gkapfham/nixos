@@ -323,6 +323,16 @@ in
   # the installation of Python programs that
   # have C, C++, or Rust extensions
   programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # These libraries are needed for
+    # running LLMs that are backed by GPUs
+    # --> Vulkan loader enables libvulkan.so.1
+    vulkan-loader
+    # --> GL enables libEGL.so.1
+    libGL
+    # --> OpenCL ICD loader enables libOpenCL.so
+    ocl-icd
+  ];
 
   # Note: some packages are not installed in either the user
   # or the system profile and are instead installed through
