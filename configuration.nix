@@ -390,6 +390,7 @@ in
       miniserve
       neofetch
       netscanner
+      nix-index
       nix-search-tv
       pastel
       qrencode
