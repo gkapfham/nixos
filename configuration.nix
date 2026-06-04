@@ -31,18 +31,18 @@ in
   # is a need to pin the installation to a specific version
 
   # --> Option (1): Install the latest kernel from the NixOS channel
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # --> Option (2): Install a specific kernel version from the NixOS channel
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_18);
+  # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_18);
 
   # Use a ramdisk for /tmp to improve performance of temporary files
   boot.tmp.useTmpfs = true;
   boot.tmp.tmpfsSize = "20G";
 
-  # Use a ramdisk for browser profiles and cache
-  # but sync the cache to disk every 10 minutes
-  # so as to prevent data loss from memory
+  # # Use a ramdisk for browser profiles and cache
+  # # but sync the cache to disk every 10 minutes
+  # # so as to prevent data loss from memory
   services.psd = {
     enable = true;
     resyncTimer = "10m"; # Sync to disk every 10 minutes
@@ -55,7 +55,8 @@ in
   boot.kernelParams = [
     "mem_sleep_default=s2idle"
     "amdgpu.dcdebugmask=0x10"
-    "pcie_aspm=off"
+    # preliminary testing suggests that this is no longer needed
+    # "pcie_aspm=off"
   ];
 
   # Configure how the system sleeps when the lid is closed;
@@ -112,20 +113,20 @@ in
 
   # Enable auto-cpufreq service
   services.tlp.enable = false;
-  services.power-profiles-daemon.enable = false;
-  services.auto-cpufreq = {
-    enable = true;
-    settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "never";
-      };
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
-    };
-  };
+  services.power-profiles-daemon.enable = true;
+  # services.auto-cpufreq = {
+  #   enable = true;
+  #   settings = {
+  #     battery = {
+  #       governor = "powersave";
+  #       turbo = "never";
+  #     };
+  #     charger = {
+  #       governor = "performance";
+  #       turbo = "auto";
+  #     };
+  #   };
+  # };
 
   # Although the iwd backend is suggested for
   # stability, it may not enable the wireless
@@ -160,7 +161,7 @@ in
   hardware.graphics.enable = true;
 
   # Do not use wayland
-  services.displayManager.gdm.wayland = false;
+  # services.displayManager.gdm.wayland = false;
 
   # Disable the GNOME Desktop Environment
   services.desktopManager.gnome.enable = false;
@@ -250,7 +251,7 @@ in
   # Use light for controlling the backlight; see
   # the i3 configuration for more details on
   # how to use command with the i3 window manager
-  programs.light.enable = true;
+  # programs.light.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -323,16 +324,16 @@ in
   # the installation of Python programs that
   # have C, C++, or Rust extensions
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # These libraries are needed for
-    # running LLMs that are backed by GPUs
-    # --> Vulkan loader enables libvulkan.so.1
-    vulkan-loader
-    # --> GL enables libEGL.so.1
-    libGL
-    # --> OpenCL ICD loader enables libOpenCL.so
-    ocl-icd
-  ];
+  # programs.nix-ld.libraries = with pkgs; [
+  #   # These libraries are needed for
+  #   # running LLMs that are backed by GPUs
+  #   # --> Vulkan loader enables libvulkan.so.1
+  #   vulkan-loader
+  #   # --> GL enables libEGL.so.1
+  #   libGL
+  #   # --> OpenCL ICD loader enables libOpenCL.so
+  #   ocl-icd
+  # ];
 
   # Note: some packages are not installed in either the user
   # or the system profile and are instead installed through
@@ -388,7 +389,6 @@ in
       luaformatter
       mdserve
       miniserve
-      neofetch
       netscanner
       nix-index
       nix-search-tv
@@ -501,6 +501,7 @@ in
     aspellDicts.en-science
     bibtool
     bottom
+    brightnessctl
     csvlens
     curl
     delta
@@ -586,12 +587,18 @@ in
     xclip
     xcape
     xdotool
-    xorg.xbacklight
-    xorg.xcursorthemes
-    xorg.xev
-    xorg.xinit
-    xorg.xrdb
-    xorg.xwininfo
+    # xorg.xbacklight
+    # xorg.xcursorthemes
+    # xorg.xev
+    # xorg.xinit
+    # xorg.xrdb
+    # xorg.xwininfo
+    xbacklight
+    xcursorthemes
+    xev
+    xinit
+    xrdb
+    xwininfo
     zlib
     zip
     xsel
