@@ -149,7 +149,7 @@ in
     python-with-custom-packages
     quarto-with-custom-python-packages
     neovim-with-custom-python-packages
-    unstable.amp-cli
+    # unstable.amp-cli
     unstable.ast-grep
     unstable.auto-cpufreq
     unstable.basedpyright
