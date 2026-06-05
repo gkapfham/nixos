@@ -163,9 +163,6 @@ in
   # Setup hardware support to X11
   hardware.graphics.enable = true;
 
-  # Do not use wayland
-  # services.displayManager.gdm.wayland = false;
-
   # Disable the GNOME Desktop Environment
   services.desktopManager.gnome.enable = false;
 
