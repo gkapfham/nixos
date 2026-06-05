@@ -154,6 +154,9 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
+  # Enable time syncing services
+  services.timesyncd.enable = true;
+
   # Enable the X11 windowing system
   services.xserver.enable = true;
 
