@@ -374,6 +374,7 @@ in
       croc
       csvlens
       csview
+      deno
       ddcutil
       rwedid
       dig
