@@ -43,10 +43,10 @@ in
   # # Use a ramdisk for browser profiles and cache
   # # but sync the cache to disk every 10 minutes
   # # so as to prevent data loss from memory
-  services.psd = {
-    enable = true;
-    resyncTimer = "10m"; # Sync to disk every 10 minutes
-  };
+  # services.psd = {
+  #   enable = true;
+  #   resyncTimer = "10m"; # Sync to disk every 10 minutes
+  # };
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
 
