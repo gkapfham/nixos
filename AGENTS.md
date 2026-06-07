@@ -8,7 +8,8 @@ This document provides essential context for working with this NixOS system conf
 - **Platform**: Framework 13 AMD (7040 series)
 - **Architecture**: x86_64-linux
 - **NixOS Version**: 23.11 (stateVersion)
-- **Kernel**: linux_6_18 (pinned, not latest)
+- **Kernel**: `linuxPackages_latest` from the active channel (a `linux_6_18`
+  pin is available as a commented alternative at `configuration.nix:37`)
 - **Window Manager**: i3 (X11, not Wayland)
 - **Display Manager**: LightDM with GTK greeter
 
@@ -184,9 +185,10 @@ sudo nixos-rebuild switch
 
 ### Power Management
 
-- Uses `auto-cpufreq` instead of `tlp`
-- `power-profiles-daemon` is disabled
-- Kernel params include suspend optimizations for Framework 13
+- `power-profiles-daemon` is enabled (`services.power-profiles-daemon.enable = true`); this is the active power governor
+- `tlp` is disabled (`services.tlp.enable = false`)
+- `auto-cpufreq` binary is installed (from the unstable overlay) but its service is NOT enabled (`services.auto-cpufreq` is commented out in `configuration.nix:117-129`)
+- Kernel params include suspend optimizations for Framework 13 (`mem_sleep_default=s2idle`, `amdgpu.dcdebugmask=0x10`)
 
 ### Development Environment
 
