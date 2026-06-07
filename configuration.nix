@@ -497,16 +497,17 @@ in
     acpi
     arandr
     aspell
+    autorandr
     aspellDicts.en
     aspellDicts.en-computers
     aspellDicts.en-science
     bibtool
     bottom
     brightnessctl
-    csvlens
     curl
     delta
     dua
+    duf
     dust
     evince
     framework-tool
@@ -515,16 +516,19 @@ in
     ghostscript
     gnumake
     highlight-pointer
+    hyperfine
     lazygit
     libinput-gestures
     linux-firmware
     linuxKernel.packages.linux_zen.cpupower
     lm_sensors
     lxappearance
+    miller
     # i3lock-fancy-rapid
     betterlockscreen
     iw
-    iwd
+    # iwd
+    just
     file
     fw-ectool
     fwupd
@@ -550,6 +554,8 @@ in
     mermaid-cli
     mdl
     networkmanagerapplet
+    nh
+    nix-output-monitor
     nix-search-cli
     nix-tree
     nmap
@@ -583,6 +589,7 @@ in
     wiremix
     wavemon
     wget
+    wifitui
     wmctrl
     wordnet
     xclip
