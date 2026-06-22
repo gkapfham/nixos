@@ -170,6 +170,7 @@ in
     unstable.i3status
     unstable.nixfmt
     unstable.opencode
+    unstable.pi-coding-agent
     unstable.picom
     unstable.poetry
     unstable.poppler
