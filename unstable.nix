@@ -106,10 +106,20 @@ let
   # use the unstable version of Quarto
   # with all of the custom packages defined
   # by the default-python-packages variable
-  quarto-with-custom-python-packages = unstable.quarto.override {
-    python3 = python-with-custom-packages;
-    extraPythonPackages = default-python-packages;
-  };
+  # Use a patched version of Quarto to work around a pandoc API change
+  # where "syntax-highlighting" was renamed to "highlight-style".
+  # See https://github.com/NixOS/nixpkgs/issues/519484
+  quarto-with-custom-python-packages =
+    (pkgs.quarto.override {
+      python3 = python-with-custom-packages;
+      extraPythonPackages = default-python-packages;
+    }).overrideAttrs
+      (oldAttrs: {
+        postPatch = (oldAttrs.postPatch or "") + ''
+          substituteInPlace bin/quarto.js \
+            --replace-fail "syntax-highlighting" "highlight-style"
+        '';
+      });
 
   # use the unstable version of Neovim
   # with a restricted number of Lua and Python
@@ -142,15 +152,10 @@ let
 
 in
 {
-
-  # define the unstable (and specially configured)
-  # system packages that are available to all users
-  # environment.systemPackages = with pkgs; [
   environment.systemPackages = [
     python-with-custom-packages
     quarto-with-custom-python-packages
     neovim-with-custom-python-packages
-    # unstable.amp-cli
     unstable.ast-grep
     unstable.auto-cpufreq
     unstable.basedpyright
