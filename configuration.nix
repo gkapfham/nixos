@@ -141,12 +141,13 @@ in
   # they are not used and consume extra battery
   hardware.sensor.iio.enable = false;
 
-  # Enable netbird tailscale by default; note that this
-  # installs the cli-based program and runs the daemon
+  # Enable the Netbird service
   services.netbird.enable = true;
 
-  # Currently disable the use of tailscale
-  # services.tailscale.enable = true;
+  # Add shadow to the service PATH so netbird SSH can manage user accounts
+  # on NixOS (where traditional Unix tools aren't on the default PATH).
+  # See https://github.com/NixOS/nixpkgs/pull/520740
+  systemd.services.netbird.path = [ pkgs.shadow ];
 
   # Allow SSH server on this netbird peer so that
   # other peers can connect via `netbird ssh`
