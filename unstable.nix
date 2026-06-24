@@ -73,6 +73,7 @@ let
       htmlmin
       ipython
       ipykernel
+      jupyter
       jupyter-client
       jupyterlab
       mdformat
