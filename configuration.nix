@@ -665,6 +665,8 @@ in
     luajitPackages.tiktoken_core
     nodejs_22
     prettierd
+    # python314
+    # quarto
     R
     zig
     zulu
