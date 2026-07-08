@@ -436,6 +436,7 @@ in
       nix-index
       nix-search-tv
       pastel
+      podman
       qrencode
       ripgrep
       ripgrep-all
@@ -663,7 +664,7 @@ in
     go
     lua5_3_compat
     luajitPackages.tiktoken_core
-    nodejs_22
+    nodejs_latest
     prettierd
     # python314
     # quarto
