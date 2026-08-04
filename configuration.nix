@@ -424,6 +424,7 @@ in
       eza
       fastfetch
       flyctl
+      graphviz
       gum
       imagemagick
       immich-go
