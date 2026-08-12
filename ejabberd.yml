@@ -1,0 +1,86 @@
+# ejabberd configuration for pi-msg
+#
+# This XMPP server bridges the pi coding agent to chat clients
+# (see https://github.com/zachpmanson/pi-msg).
+#
+# Minimal setup: one host, one c2s listener (port 5222) with
+# mandatory STARTTLS. TLS certificates are generated with mkcert
+# and installed to /etc/ejabberd/certs/ by the setup script.
+#
+# The real XMPP domain is injected at runtime by the NixOS systemd unit
+# via the EJABBERD_MACRO_XM_DOMAIN environment variable (supported since
+# ejabberd 24.12). The define_macro below is only a placeholder fallback
+# so the server can still start if that variable is missing.
+define_macro:
+  "XM_DOMAIN": "xmpp.example.org"
+
+hosts:
+  - XM_DOMAIN
+
+loglevel: info
+
+# TLS certificates (installed by ~/.config/pi-msg/scripts/setup.sh)
+# One combined PEM file (private key + certificate + CA chain) so that
+# ejabberd never fails to pair the key with the certificate.
+certfiles:
+  - "/etc/ejabberd/certs/cert.pem"
+
+listen:
+  - port: 5222
+    ip: "::"
+    module: ejabberd_c2s
+    max_stanza_size: 262144
+    shaper: c2s_shaper
+    access: c2s
+    starttls: true
+    starttls_required: true
+    tls: false
+
+s2s_use_starttls: optional
+
+auth_method: internal
+
+acl:
+  local:
+    user_regexp: ""
+
+access_rules:
+  c2s:
+    deny: blocked
+    allow: all
+
+shaper:
+  normal:
+    rate: 3000
+    burst_size: 20000
+
+shaper_rules:
+  max_user_sessions: 10
+  max_user_offline_messages:
+    5000: admin
+    100: all
+  c2s_shaper:
+    none: admin
+    normal: all
+
+modules:
+  # Needed for the change_password / check_account admin commands
+  # (without it, ejabberdctl change_password is "unknown command")
+  mod_admin_extra: {}
+  mod_blocking: {}
+  mod_caps: {}
+  mod_carboncopy: {}
+  mod_client_state: {}
+  mod_disco: {}
+  mod_offline:
+    access_max_user_messages: max_user_offline_messages
+  mod_ping: {}
+  mod_privacy: {}
+  mod_private: {}
+  mod_roster:
+    versioning: true
+  mod_stream_mgmt:
+    resend_on_timeout: if_offline
+  mod_vcard: {}
+  mod_version:
+    show_os: false
