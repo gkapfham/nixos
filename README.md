@@ -38,6 +38,7 @@ Think about the following issues before adopting this NixOS configuration:
 - [📦 System Packages](#-system-packages)
 - [🔒 Security](#-security)
 - [🗑️ Garbage Collection](#-garbage-collection)
+- [🛠️ Rust Toolchain Fix](#-rust-toolchain-fix)
 - [📅 System State Version](#-system-state-version)
 - [🖥️ Hardware Configuration](#-hardware-configuration)
 - [🚀 Unstable Packages](#-unstable-packages)
@@ -156,6 +157,38 @@ Think about the following issues before adopting this NixOS configuration:
 
 - Automatic garbage collection enabled
 - Weekly cleanup of old generations
+- ⚠️ Weekly GC can break rustup toolchains (removes the glibc they were patched against) — see [Rust Toolchain Fix](#-rust-toolchain-fix)
+
+## 🛠️ Rust Toolchain Fix
+
+The nixpkgs `rustup` package automatically patches every downloaded
+toolchain so its binaries point at the glibc from the nixpkgs channel at
+install time (see `0001-dynamically-patchelf-binaries.patch` in the rustup
+package). If that glibc is later removed from the store by garbage
+collection, all toolchain binaries fail with:
+
+```text
+error: command failed: 'cargo'
+Caused by:
+    No such file or directory (os error 2)
+```
+
+Fix by reinstalling the stable toolchain (it is re-patched against the
+current channel glibc) and re-adding any extra targets/components:
+
+```bash
+rustup toolchain uninstall stable
+rustup toolchain install stable
+rustup target add wasm32-wasip1      # needed for building Zellij plugins
+rustup component add rust-analyzer   # only if you use it from the toolchain
+```
+
+- See [NixOS/nixpkgs#473661](https://github.com/NixOS/nixpkgs/issues/473661)
+  for the upstream discussion of this issue.
+- `programs.nix-ld` (enabled in `configuration.nix`) provides the loader
+  shim (`/lib64/ld-linux-x86-64.so.2`) that lets unpatched binaries run
+  against the current system glibc, keeping toolchains working across
+  glibc updates.
 
 ## 🖥️ Hardware Configuration
 
