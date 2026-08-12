@@ -153,6 +153,14 @@ in
   # other peers can connect via `netbird ssh`
   systemd.services.netbird.environment.NB_ALLOW_SERVER_SSH = "true";
 
+  # Enable the ejabberd XMPP server so that pi-msg can
+  # bridge the pi coding agent to an XMPP chat client
+  # (see https://github.com/zachpmanson/pi-msg)
+  services.ejabberd = {
+    enable = true;
+    configFile = ./ejabberd.yml;
+  };
+
   # Enable auto-cpufreq service
   services.tlp.enable = false;
   services.power-profiles-daemon.enable = true;
