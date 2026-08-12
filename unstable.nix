@@ -183,6 +183,15 @@ in
     unstable.pyrefly
     tree-sitter-latest
     unstable.ruff
+    # Rust toolchain manager. NOTE: nixpkgs' rustup patches downloaded
+    # toolchains against the channel glibc at install time; if garbage
+    # collection later removes that glibc, all toolchain binaries fail
+    # with "error: command failed: 'cargo'". Fix: reinstall the toolchain
+    # and re-add targets/components, e.g.:
+    #   rustup toolchain uninstall stable
+    #   rustup toolchain install stable
+    #   rustup target add wasm32-wasip1   # for building Zellij plugins
+    # See README.md -> "Rust Toolchain Fix" for details.
     unstable.rustup
     unstable.treemd
     unstable.ty
