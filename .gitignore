@@ -1,0 +1,2 @@
+# Per-machine secrets — must never be published.
+secrets.nix
