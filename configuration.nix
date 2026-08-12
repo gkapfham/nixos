@@ -10,6 +10,11 @@
 let
   lib = pkgs.lib;
 
+  # Per-machine secrets (gitignored via .gitignore). Holds values that
+  # must not appear in the public repository, e.g. the real XMPP domain
+  # for the ejabberd server.
+  secrets = import ./secrets.nix;
+
   # Pin zellij to 0.43.1 to avoid high CPU bug in newer versions.
   # Remove this pin and switch back to `pkgs.zellij` once the bug is fixed.
   zellij-pinned = pkgs.rustPlatform.buildRustPackage {
@@ -161,9 +166,17 @@ in
     configFile = ./ejabberd.yml;
   };
 
-  # Enable auto-cpufreq service
+  # Inject the real XMPP domain at runtime instead of hardcoding it in
+  # ejabberd.yml. ejabberd (>= 24.12) turns EJABBERD_MACRO_* environment
+  # variables into config macros, overriding the placeholder default in
+  # ejabberd.yml (define_macro). The value comes from gitignored secrets.nix.
+  systemd.services.ejabberd.environment.EJABBERD_MACRO_XM_DOMAIN = secrets.domain;
+
+  # Enable power-profiles-daemon service
   services.tlp.enable = false;
   services.power-profiles-daemon.enable = true;
+
+  # Currently disable the use of the autofreq approach
   # services.auto-cpufreq = {
   #   enable = true;
   #   settings = {
