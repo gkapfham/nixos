@@ -157,18 +157,18 @@ in
     quarto-with-custom-python-packages
     neovim-with-custom-python-packages
     unstable.ast-grep
-    unstable.auto-cpufreq
+    # unstable.auto-cpufreq
     unstable.basedpyright
     unstable.dwt1-shell-color-scripts
     unstable.copilot-language-server
-    unstable.crush
+    # unstable.crush
     unstable.deskflow
     unstable.decktape
     unstable.harper
     unstable.framework-tool-tui
     unstable.fzf
     unstable.fzy
-    unstable.gemini-cli
+    # unstable.gemini-cli
     unstable.github-copilot-cli
     unstable.google-cloud-sdk
     unstable.gws
