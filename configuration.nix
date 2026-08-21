@@ -101,8 +101,13 @@ in
   boot.kernelParams = [
     "mem_sleep_default=s2idle"
     "amdgpu.dcdebugmask=0x10"
-    # preliminary testing suggests that this is no longer needed
+    "pcie_port_pm=off"
+    # 2: next — try ASPM performance policy before full off (allows L0s, avoids deep L1)
+    # "pcie_aspm.policy=performance"
+    # 3: next — global ASPM off (proven fallback from b8451e7, moderate battery cost ~0.5-2W)
     # "pcie_aspm=off"
+    # 4: last resort — keep GPU in D0 (amdgpu.runpm=0, heavy cost ~1.5-3W, only if PCIe fixes fail)
+    # "amdgpu.runpm=0"
   ];
 
   # Configure how the system sleeps when the lid is closed;
