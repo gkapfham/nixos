@@ -13,7 +13,7 @@ let
   # Per-machine secrets (gitignored via .gitignore). Holds values that
   # must not appear in the public repository, e.g. the real XMPP domain
   # for the ejabberd server.
-  secrets = import ./secrets.nix;
+  # secrets = import ./secrets.nix;
 
   # Pin zellij to 0.43.1 to avoid high CPU bug in newer versions.
   # Remove this pin and switch back to `pkgs.zellij` once the bug is fixed.
@@ -166,16 +166,16 @@ in
   # Enable the ejabberd XMPP server so that pi-msg can
   # bridge the pi coding agent to an XMPP chat client
   # (see https://github.com/zachpmanson/pi-msg)
-  services.ejabberd = {
-    enable = true;
-    configFile = ./ejabberd.yml;
-  };
+  # services.ejabberd = {
+  #   enable = true;
+  #   configFile = ./ejabberd.yml;
+  # };
 
   # Inject the real XMPP domain at runtime instead of hardcoding it in
   # ejabberd.yml. ejabberd (>= 24.12) turns EJABBERD_MACRO_* environment
   # variables into config macros, overriding the placeholder default in
   # ejabberd.yml (define_macro). The value comes from gitignored secrets.nix.
-  systemd.services.ejabberd.environment.EJABBERD_MACRO_XM_DOMAIN = secrets.domain;
+  # systemd.services.ejabberd.environment.EJABBERD_MACRO_XM_DOMAIN = secrets.domain;
 
   # Enable power-profiles-daemon service
   services.tlp.enable = false;
