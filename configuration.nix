@@ -470,6 +470,7 @@ in
       tmuxinator
       trippy
       visidata
+      wrangler
       yazi
       yq-go
       # browsers
