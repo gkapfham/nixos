@@ -109,8 +109,9 @@ let
   # Use a patched version of Quarto to work around a pandoc API change
   # where "syntax-highlighting" was renamed to "highlight-style".
   # See https://github.com/NixOS/nixpkgs/issues/519484
+
   quarto-with-custom-python-packages =
-    (pkgs.quarto.override {
+    (unstable.quarto.override {
       python3 = python-with-custom-packages;
       extraPythonPackages = default-python-packages;
     }).overrideAttrs
@@ -120,6 +121,11 @@ let
             --replace-fail "syntax-highlighting" "highlight-style"
         '';
       });
+
+  # quarto-with-custom-python-packages = unstable.quarto.override {
+  #   python3 = python-with-custom-packages;
+  #   extraPythonPackages = default-python-packages;
+  # };
 
   # use the unstable version of Neovim
   # with a restricted number of Lua and Python
