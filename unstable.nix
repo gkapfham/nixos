@@ -204,6 +204,7 @@ in
     unstable.uv
     unstable.vex-tui
     unstable.worktrunk
+    unstable.zellij
     unstable.zoxide
     unstable.zuban
   ];
