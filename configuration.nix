@@ -17,43 +17,43 @@ let
 
   # Pin zellij to 0.43.1 to avoid high CPU bug in newer versions.
   # Remove this pin and switch back to `pkgs.zellij` once the bug is fixed.
-  zellij-pinned = pkgs.rustPlatform.buildRustPackage {
-    pname = "zellij";
-    version = "0.43.1";
-    src = pkgs.fetchFromGitHub {
-      owner = "zellij-org";
-      repo = "zellij";
-      rev = "v0.43.1";
-      hash = "sha256-pUExOToThqDBrNNKHh8Z+PFkijx22I7gpYXTAywlSxM=";
-    };
-    postPatch = ''
-      substituteInPlace Cargo.toml \
-        --replace-fail ', "vendored_curl"' ""
-    '';
-    cargoHash = "sha256-KWE9K7M2pelow5I2rvEZho9L0kmnSXVLDD9XBpzlEEY=";
-    env.OPENSSL_NO_VENDOR = 1;
-    nativeBuildInputs = with pkgs; [
-      mandown
-      installShellFiles
-      pkg-config
-      (lib.getDev curl)
-    ];
-    buildInputs = with pkgs; [
-      curl
-      openssl
-    ];
-    postInstall = ''
-      mandown docs/MANPAGE.md > zellij.1
-      installManPage zellij.1
-      installShellCompletion --cmd zellij \
-        --bash <($out/bin/zellij setup --generate-completion bash) \
-        --fish <($out/bin/zellij setup --generate-completion fish) \
-        --zsh <($out/bin/zellij setup --generate-completion zsh)
-    '';
-    meta = {
-      mainProgram = "zellij";
-    };
-  };
+  # zellij-pinned = pkgs.rustPlatform.buildRustPackage {
+  #   pname = "zellij";
+  #   version = "0.43.1";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "zellij-org";
+  #     repo = "zellij";
+  #     rev = "v0.43.1";
+  #     hash = "sha256-pUExOToThqDBrNNKHh8Z+PFkijx22I7gpYXTAywlSxM=";
+  #   };
+  #   postPatch = ''
+  #     substituteInPlace Cargo.toml \
+  #       --replace-fail ', "vendored_curl"' ""
+  #   '';
+  #   cargoHash = "sha256-KWE9K7M2pelow5I2rvEZho9L0kmnSXVLDD9XBpzlEEY=";
+  #   env.OPENSSL_NO_VENDOR = 1;
+  #   nativeBuildInputs = with pkgs; [
+  #     mandown
+  #     installShellFiles
+  #     pkg-config
+  #     (lib.getDev curl)
+  #   ];
+  #   buildInputs = with pkgs; [
+  #     curl
+  #     openssl
+  #   ];
+  #   postInstall = ''
+  #     mandown docs/MANPAGE.md > zellij.1
+  #     installManPage zellij.1
+  #     installShellCompletion --cmd zellij \
+  #       --bash <($out/bin/zellij setup --generate-completion bash) \
+  #       --fish <($out/bin/zellij setup --generate-completion fish) \
+  #       --zsh <($out/bin/zellij setup --generate-completion zsh)
+  #   '';
+  #   meta = {
+  #     mainProgram = "zellij";
+  #   };
+  # };
 
 in
 {
@@ -431,6 +431,7 @@ in
       borgbackup
       borgmatic
       bun
+      chafa
       clipboard-jh
       cloc
       croc
@@ -449,6 +450,7 @@ in
       imagemagick
       immich-go
       lesspipe
+      lsix
       lsof
       luaformatter
       mdserve
@@ -675,7 +677,7 @@ in
     zlib
     zip
     xsel
-    zellij-pinned
+    # zellij-pinned
     # zellij
     zenith
     zk
