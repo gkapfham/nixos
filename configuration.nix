@@ -287,8 +287,11 @@ in
 
   # Configure LightDM with GTK Greeter
   # Using GTK greeter instead of slick since slick has background image issues
+  # Solid color #6E466E to match i3 hsetroot (generated 1x1 PNG via imagemagick)
   services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.lightdm.background = ./media/wallpaper.png;
+  services.xserver.displayManager.lightdm.background =
+    pkgs.runCommand "lightdm-solid-bg.png" { }
+      "${pkgs.imagemagick}/bin/convert -size 1x1 xc:'#6E466E' $out";
   services.xserver.displayManager.lightdm.greeters.gtk = {
     enable = true;
     theme.name = "Adwaita-dark";
@@ -514,6 +517,7 @@ in
       mutt
       mutt-wizard
       neomutt
+      notmuch
       pass
       # theme
       adwaita-qt
@@ -714,6 +718,8 @@ in
     OPENSSL_DIR = "${pkgs.openssl.dev}";
     OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+    XCURSOR_SIZE = "48";
+    XCURSOR_THEME = "phinger-cursors-dark";
   };
 
   # Enable update of the firmware through Linux
