@@ -287,11 +287,15 @@ in
 
   # Configure LightDM with GTK Greeter
   # Using GTK greeter instead of slick since slick has background image issues
-  # Solid color #6E466E to match i3 hsetroot (generated 1x1 PNG via imagemagick)
+  # Purple hexagonal mosaic wallpaper. Regenerate it (or make variants) with
+  # media/make_wallpaper.py -- see media/WALLPAPER.md for every option:
+  #   uv run media/make_wallpaper.py --scheme nebula --chroma 1.15 \
+  #     --out media/wallpaper_purple.png
+  #   uv run media/make_wallpaper.py --list-schemes
+  #   uv run media/make_wallpaper.py --explore /tmp/gallery
+  # (media/wallpaper.png is the original orange/red version)
   services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.lightdm.background =
-    pkgs.runCommand "lightdm-solid-bg.png" { }
-      "${pkgs.imagemagick}/bin/convert -size 1x1 xc:'#6E466E' $out";
+  services.xserver.displayManager.lightdm.background = ./media/wallpaper_purple.png;
   services.xserver.displayManager.lightdm.greeters.gtk = {
     enable = true;
     theme.name = "Adwaita-dark";
@@ -396,6 +400,49 @@ in
   # have C, C++, or Rust extensions
   programs.nix-ld.enable = true;
 
+  # nix-ld ships a built-in library set that covers the systemd, nix, and gcc
+  # libraries a pre-compiled binary normally needs, but not the desktop stack
+  # that a Chromium/Electron binary links against. Add the missing glibc-style
+  # libraries here so that such binaries start. The list below mirrors the
+  # RPATH that nixpkgs' own electron-unwrapped binary declares, which is the
+  # canonical set for a browser engine on NixOS. That is what lets the Electron
+  # binary bundled with terminal-browser run without a per-application shim,
+  # and it also benefits any other unpatched binary that links against GTK.
+  programs.nix-ld.libraries = with pkgs; [
+    pkgs."alsa-lib"
+    pkgs."at-spi2-core"
+    cairo
+    cups
+    dbus
+    expat
+    flac
+    glib
+    gtk3
+    libffi
+    libgbm
+    libglvnd
+    libjpeg_turbo
+    libnotify
+    libpulseaudio
+    libsecret
+    libx11
+    libxcb
+    libxcomposite
+    libxdamage
+    libxext
+    libxfixes
+    libxkbcommon
+    libxrandr
+    libxslt
+    nspr
+    nss
+    pango
+    pciutils
+    pipewire
+    speechd
+    pkgs."vulkan-loader"
+  ];
+
   # NOTE: nix-ld also lets fresh, unpatched rustup toolchains run against
   # the current system glibc. If a rustup toolchain breaks after garbage
   # collection, see README.md -> "Rust Toolchain Fix".
@@ -436,6 +483,7 @@ in
       bun
       chafa
       clipboard-jh
+      cloudflared
       cloc
       croc
       csvlens
