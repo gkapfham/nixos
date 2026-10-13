@@ -287,15 +287,31 @@ in
 
   # Configure LightDM with GTK Greeter
   # Using GTK greeter instead of slick since slick has background image issues
-  # Purple hexagonal mosaic wallpaper. Regenerate it (or make variants) with
-  # media/make_wallpaper.py -- see media/WALLPAPER.md for every option:
-  #   uv run media/make_wallpaper.py --scheme nebula --chroma 1.15 \
-  #     --out media/wallpaper_purple.png
-  #   uv run media/make_wallpaper.py --list-schemes
-  #   uv run media/make_wallpaper.py --explore /tmp/gallery
-  # (media/wallpaper.png is the original orange/red version)
+  #
+  # The greeter shows the *path* /var/lib/wallpaper/current.png, not a store
+  # path.  That string is written verbatim into
+  # /etc/lightdm/lightdm-gtk-greeter.conf, so replacing the file behind it
+  # changes the login background with no rebuild.  Choose a wallpaper with
+  #
+  #   ~/configure/wallpaper/bin/wallpaper use <name>
+  #
+  # which also re-applies the desktop background and refreshes the lock screen;
+  # see ~/configure/wallpaper/README.md for the whole mechanism.
+  #
+  # media/wallpaper.png is the seeded default and the only wallpaper that is a
+  # build input of this configuration, so a fresh install has something to show
+  # before anything has been chosen.  The generator, its documentation and the
+  # source image it measures all live in ~/configure/wallpaper.
   services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.lightdm.background = ./media/wallpaper_purple.png;
+  services.xserver.displayManager.lightdm.background = "/var/lib/wallpaper/current.png";
+
+  # The mutable "which wallpaper" pointer.  0775 root:users so that
+  # bin/wallpaper can publish a new one without sudo; `L` (not `L+`) seeds the
+  # shipped default once and never clobbers a wallpaper chosen afterwards.
+  systemd.tmpfiles.rules = [
+    "d /var/lib/wallpaper 0775 root users - -"
+    "L /var/lib/wallpaper/current.png - - - - ${./media/wallpaper.png}"
+  ];
   services.xserver.displayManager.lightdm.greeters.gtk = {
     enable = true;
     theme.name = "Adwaita-dark";
