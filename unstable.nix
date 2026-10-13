@@ -178,6 +178,8 @@ in
     unstable.github-copilot-cli
     unstable.google-cloud-sdk
     unstable.gws
+    # agent multiplexer that lives in the terminal.
+    unstable.herdr
     # unstable.jupyter
     unstable.i3status
     unstable.nixfmt
