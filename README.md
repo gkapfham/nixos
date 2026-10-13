@@ -213,3 +213,10 @@ rustup component add rust-analyzer   # only if you use it from the toolchain
 - **Neovim**: Unstable version with Lua (magick) and Python packages for plugins
 - **Development Tools**: ast-grep, cargo, copilot-language-server, deskflow, decktape, harper, rustc, rustfmt, uv, ty
 - **Utilities**: fzf, fzy, i3status, jupyter, opencode, poetry, poppler, pyrefly, tree-sitter, ruff, picom, zoxide
+- **Herdr**: terminal agent multiplexer, from the unstable channel (it is not in
+  the stable channel, and nixpkgs' build is in the binary cache, so `kix`
+  downloads it rather than compiling it). Update it with `ukix`, along with the
+  rest of the system. Upstream's `herdr update` must **not** be used for a Nix
+  install: it would try to rewrite a read-only store path. If `herdr` on `PATH`
+  is an older build, check `~/.local/bin/herdr` — that directory comes before
+  the system profile, so a manually downloaded binary there wins.
