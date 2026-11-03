@@ -3,6 +3,25 @@
 Makes the [terminal-browser](https://terminal-browser.sh/) bundle — installed
 via its upstream script — actually run on NixOS.
 
+## Status: superseded by nix-ld
+
+`configuration.nix` now sets `programs.nix-ld.libraries` to the same library set
+this directory pins (nixpkgs' `electron-unwrapped` RPATH), so unpatched Electron
+binaries resolve those libraries through `nix-ld` itself. The shim is therefore
+redundant — it is kept only as a fallback, and can be dropped with
+
+```bash
+~/configure/nixos/terminal-browser/de-shim.sh
+```
+
+That script checks that the real binary loads through `nix-ld` on its own
+(`LD_LIBRARY_PATH` cleared) and refuses to remove the shim if it does not, so it
+is safe to run at any time. With the shim gone, upstream upgrades need no
+re-apply at all.
+
+The rest of this file documents the shim approach for the case where `nix-ld` is
+not in use, or is missing an entry.
+
 ## The problem
 
 terminal-browser's install script (`curl -fsSL https://terminal-browser.sh/install | bash`)
@@ -47,11 +66,16 @@ rebuild, no flakes, no unfree packages:
      those references from the input scanner.
 
 3. **A shim + a GC root.**
-   The real binary is kept as `app/electron/electron.real` and
-   `app/electron/electron` becomes a ~10-line wrapper that exports
+   The real binary is kept as `app/electron/<name>.real` and
+   `app/electron/<name>` becomes a ~10-line wrapper that exports
    `LD_LIBRARY_PATH=<merged libs>/lib` and execs the real binary. The merged
    libs store path is registered as a GC root at
    `~/.gcroots/terminal-browser-libs` so `nix-collect-garbage` never deletes it.
+
+`<name>` is the bundled Electron entry binary the CLI execs: `pixel` since
+v0.11.1, `electron` before that. The installer detects which one is present
+(a file that is already one of our shims does not count), so an upstream rename
+needs no script change.
 
 The shim sits at the exact path the CLI hard-codes for both node-mode
 (CLI runner) and browser-window launches, so a single shim covers everything.
@@ -62,6 +86,7 @@ The shim sits at the exact path the CLI hard-codes for both node-mode
 terminal-browser/
 ├── README.md                        # this file
 ├── install-terminal-browser.sh      # bootstrap + reapply (idempotent)
+├── de-shim.sh                       # remove the shim (nix-ld now covers this)
 ├── electron-libs.nix                # merges the library set into one store path
 └── electron-rpath.txt               # the pinned library set (store dirs)
 ```
@@ -70,8 +95,8 @@ Runtime artifacts on the machine:
 
 ```
 ~/.local/bin/terminal-browser                          # the CLI (upstream)
-~/.local/share/terminal-browser/app/electron/electron  # shim (ours)
-~/.local/share/terminal-browser/app/electron/electron.real  # real Electron
+~/.local/share/terminal-browser/app/electron/pixel  # shim (ours)
+~/.local/share/terminal-browser/app/electron/pixel.real  # real Electron
 ~/.gcroots/terminal-browser-libs                       # GC root -> merged libs
 ~/.local/share/terminal-browser/reapply-electron-shim.sh  # delegates to repo script
 ```
@@ -98,8 +123,8 @@ The script is **idempotent** — running it again is a no-op. It will:
 
 ## After an upgrade
 
-`terminal-browser upgrade` re-downloads the bundle and replaces
-`app/electron/electron` with a fresh real binary, clobbering the shim.
+`terminal-browser upgrade` re-downloads the bundle and replaces the whole
+`app/` tree, clobbering the shim (and with it any `*.real`).
 Re-apply it with:
 
 ```bash
@@ -109,9 +134,9 @@ Re-apply it with:
 ```
 
 `--reapply` restores the shim even if the upgrade either wiped the whole
-`app/` directory or only overwrote the `electron` file in place (any stale
-`electron.real` is discarded first, so the shim always execs the fresh
-binary).
+`app/` directory or only overwrote the Electron binary in place (any stale
+`<name>.real` is discarded first, so the shim always execs the fresh binary,
+and a shim left under the other upstream name is removed).
 
 ## When the pinned library set goes stale
 
@@ -131,9 +156,9 @@ or major channel bump where the paths no longer exist, the script detects it
 
 ```bash
 # remove the shim (restore the real binary)
-rm ~/.local/share/terminal-browser/app/electron/electron
-mv ~/.local/share/terminal-browser/app/electron/electron.real \
-   ~/.local/share/terminal-browser/app/electron/electron
+rm ~/.local/share/terminal-browser/app/electron/pixel
+mv ~/.local/share/terminal-browser/app/electron/pixel.real \
+   ~/.local/share/terminal-browser/app/electron/pixel
 
 # drop the GC root; the merged libs become collectable garbage
 rm ~/.gcroots/terminal-browser-libs
