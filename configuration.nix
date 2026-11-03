@@ -181,6 +181,10 @@ in
   services.tlp.enable = false;
   services.power-profiles-daemon.enable = true;
 
+  # Turn on the upower service so that it is possible to
+  # collect power state information for the quickshell bar
+  services.upower.enable = true;
+
   # Currently disable the use of the autofreq approach
   # services.auto-cpufreq = {
   #   enable = true;
@@ -527,6 +531,7 @@ in
       nix-search-tv
       pastel
       podman
+      quickshell
       qrencode
       ripgrep
       ripgrep-all
