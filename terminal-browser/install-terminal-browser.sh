@@ -76,7 +76,9 @@ regenerate_rpath() {
 
 build_libs() {
   say "building merged system-libs store path ($LIBS_NIX)..."
-  nix-build "$LIBS_NIX" | tail -1
+  # --no-out-link: the GC root below is what keeps the path alive, so there is
+  # no need for a ./result symlink in this repository.
+  nix-build --no-out-link "$LIBS_NIX" | tail -1
 }
 
 register_gcroot() {
@@ -86,34 +88,59 @@ register_gcroot() {
   say "GC root: $GCROOT_LINK -> $out"
 }
 
+# Our shim is a shell script, the real Electron an ELF binary. Only the first
+# bytes are read, so this stays cheap on a 200+ MB binary.
+is_shim() { head -c 40 "$1" 2>/dev/null | grep -q "NixOS shim"; }
+
+# Name of the bundled Electron entry binary that the CLI execs. Upstream renamed
+# it (electron -> pixel in v0.11.1), so detect it instead of hard-coding one
+# name. Prints the name on stdout; fails when neither exists.
+electron_bin_name() {
+  local n
+  for n in pixel electron; do
+    [ -f "$ELECTRON_DIR/$n" ] && ! is_shim "$ELECTRON_DIR/$n" && { printf '%s' "$n"; return 0; }
+  done
+  for n in pixel electron; do
+    [ -x "$ELECTRON_DIR/$n.real" ] && { printf '%s' "$n"; return 0; }
+  done
+  return 1
+}
+
 write_shim() {
-  local libs="$1"
-  cat > "$ELECTRON_DIR/electron" <<SHIM
+  local libs="$1" name="$2"
+  cat > "$ELECTRON_DIR/$name" <<SHIM
 #!/bin/sh
 # NixOS shim: give the bundled Electron the glibc-style system libraries that
 # NixOS lacks. Merged libs built from electron-libs.nix (keep the repo copy:
 # ~/configure/nixos/terminal-browser). The GC root keeps this store path alive.
 LIBS=$libs
 export LD_LIBRARY_PATH="\$LIBS/lib\${LD_LIBRARY_PATH:+:\$LD_LIBRARY_PATH}"
-exec "\$(dirname "\$0")/electron.real" "\$@"
+exec "\$(dirname "\$0")/$name.real" "\$@"
 SHIM
-  chmod +x "$ELECTRON_DIR/electron"
+  chmod +x "$ELECTRON_DIR/$name"
 }
 
 apply_shim() {
-  local libs="$1"
+  local libs="$1" name other
   [ -d "$ELECTRON_DIR" ] || die "electron dir not found: $ELECTRON_DIR (run without --reapply to install first)"
-  if [ -f "$ELECTRON_DIR/electron" ] && grep -q "NixOS shim" "$ELECTRON_DIR/electron" 2>/dev/null \
-     && [ -x "$ELECTRON_DIR/electron.real" ]; then
-    say "shim already in place"
+  name="$(electron_bin_name)" || die "no Electron entry binary (pixel/electron) in $ELECTRON_DIR"
+  if is_shim "$ELECTRON_DIR/$name" && [ -x "$ELECTRON_DIR/$name.real" ]; then
+    say "shim already in place: $name"
     return 0
   fi
-  # The current electron is a real (upstream) binary. Drop any stale
-  # electron.real left from a previous shim session, then move it aside.
-  rm -f "$ELECTRON_DIR/electron.real"
-  mv "$ELECTRON_DIR/electron" "$ELECTRON_DIR/electron.real"
-  write_shim "$libs"
-  say "shim installed at $ELECTRON_DIR/electron"
+  # The current $name is a real (upstream) binary. Drop any stale $name.real
+  # left from a previous shim session, then move it aside. Also drop a shim left
+  # under the other upstream name (electron <-> pixel), in case upstream renamed
+  # the binary back.
+  for other in pixel electron; do
+    [ "$other" = "$name" ] && continue
+    if is_shim "$ELECTRON_DIR/$other"; then rm -f "$ELECTRON_DIR/$other"; fi
+    rm -f "$ELECTRON_DIR/$other.real"
+  done
+  rm -f "$ELECTRON_DIR/$name.real"
+  mv "$ELECTRON_DIR/$name" "$ELECTRON_DIR/$name.real"
+  write_shim "$libs" "$name"
+  say "shim installed at $ELECTRON_DIR/$name"
 }
 
 verify() {
