@@ -215,4 +215,45 @@ in
   nixpkgs.config.packageOverrides = pkgs: {
     inherit unstable;
   };
+
+  # Ghostty's single-instance service (D-Bus activated, instant new windows,
+  # centralized logging) is declared here rather than enabled by hand, because
+  # a hand-made enablement is what broke.
+  #
+  # Ghostty ships app-com.mitchellh.ghostty.service *inside the package*, so
+  # `systemctl --user enable app-com.mitchellh.ghostty.service` writes links of
+  # the form
+  #
+  #   ~/.config/systemd/user/app-com.mitchellh.ghostty.service
+  #     -> /nix/store/<hash>-ghostty-<version>/share/systemd/user/...
+  #
+  # Those paths are version-pinned, so moving Ghostty onto the unstable channel
+  # (1.2.3 -> 1.4.0) followed by the weekly `nix.gc` left two dangling links:
+  # the one above and its `graphical-session.target.wants/` alias. The damage
+  # was worse than a missing daemon: `~/.config/systemd/user` is searched before
+  # `/run/current-system/sw/share/systemd/user`, so the dead top-level link
+  # *shadowed* the perfectly good unit that Ghostty 1.4.0 installs. The unit
+  # then reported `LoadState=not-found` and `systemctl --user enable` failed
+  # outright with "Unit app-com.mitchellh.ghostty.service does not exist".
+  #
+  # Declaring the unit makes `nixos-rebuild` regenerate it with the store path
+  # of the Ghostty that is actually installed, so it cannot dangle again. The
+  # body mirrors the unit shipped by the package; re-sync it with
+  #
+  #   cat $(nix eval --raw --impure --expr \
+  #     'with import <nixos-unstable> {}; ghostty')/share/systemd/user/app-com.mitchellh.ghostty.service
+  #
+  # after a Ghostty upgrade that changes the unit.
+  systemd.user.services."app-com.mitchellh.ghostty" = {
+    description = "Ghostty";
+    wantedBy = [ "graphical-session.target" ];
+    requires = [ "dbus.socket" ];
+    after = [ "graphical-session.target" "dbus.socket" ];
+    serviceConfig = {
+      Type = "notify-reload";
+      ReloadSignal = "SIGUSR2";
+      BusName = "com.mitchellh.ghostty";
+      ExecStart = "${unstable.ghostty}/bin/ghostty --gtk-single-instance=true --initial-window=false";
+    };
+  };
 }
