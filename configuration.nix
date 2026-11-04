@@ -206,6 +206,41 @@ in
   # ejabberd.yml (define_macro). The value comes from gitignored secrets.nix.
   # systemd.services.ejabberd.environment.EJABBERD_MACRO_XM_DOMAIN = secrets.domain;
 
+  # Shut the per-user systemd manager down quickly.
+  #
+  # Without this, a reboot or poweroff regularly stalls on
+  #
+  #   A stop job is running for User Manager for UID 1000 (28s / 2 min)
+  #
+  # and the machine has to be hard-powered-off. The reason is that the
+  # user manager cannot exit until every one of its units is gone, and the
+  # units that refuse to go are the per-surface cgroups that Ghostty creates
+  # (`linux-cgroup = single-instance` is Ghostty's default):
+  #
+  #   app-ghostty-surface-transient-<pid>.scope
+  #
+  # Each of those scopes wraps one terminal surface, so it contains the
+  # interactive zsh for that surface. An interactive zsh *ignores* SIGTERM
+  # (standard job-control behaviour; check it with `grep SigIgn
+  # /proc/<pid>/status`, which lists SIGTERM). A zellij server that
+  # daemonized out of a surface but stayed in the same cgroup (its parent
+  # becomes PID 1 while its cgroup still names the scope) keeps the scope
+  # populated after the surface is gone, too. So the SIGTERM that systemd
+  # sends when stopping the scope is simply dropped, and systemd has to wait
+  # out the full DefaultTimeoutStopSec of 90 s per scope before falling back
+  # to SIGKILL. That blows through the 2 min TimeoutStopSec of
+  # user@1000.service, which is what PID 1 is counting down on screen.
+  #
+  # Lowering the user manager's default stop timeout makes the SIGKILL
+  # fallback happen after seconds instead of 90 s, so shutdown completes on
+  # its own. 10 s is still generous for units that do respect SIGTERM.
+  #
+  # Note: NixOS already emits the `[Manager]` header into
+  # /etc/systemd/user.conf, so extraConfig carries only the setting itself.
+  systemd.user.extraConfig = ''
+    DefaultTimeoutStopSec=10s
+  '';
+
   # Enable power-profiles-daemon service
   services.tlp.enable = false;
   services.power-profiles-daemon.enable = true;
