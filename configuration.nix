@@ -102,6 +102,13 @@ in
     "mem_sleep_default=s2idle"
     "amdgpu.dcdebugmask=0x10"
     "pcie_port_pm=off"
+    # Hibernation: physical offset of the /swapfile swap header, in 4 KiB
+    # pages, obtained from `sudo filefrag -v /swapfile` as the
+    # physical_offset of extent 0. It is required because the swap area is a
+    # file and not a partition; fragmentation of the rest of the file is fine
+    # (the swap code carries the extent map), but this header offset must be
+    # recomputed if /swapfile is ever deleted, resized, or recreated.
+    "resume_offset=84025344"
     # 2: next — try ASPM performance policy before full off (allows L0s, avoids deep L1)
     # "pcie_aspm.policy=performance"
     # 3: next — global ASPM off (proven fallback from b8451e7, moderate battery cost ~0.5-2W)
@@ -109,6 +116,28 @@ in
     # 4: last resort — keep GPU in D0 (amdgpu.runpm=0, heavy cost ~1.5-3W, only if PCIe fixes fail)
     # "amdgpu.runpm=0"
   ];
+
+  # Support hibernation (suspend-to-disk) by adding a swap file that lives
+  # inside the LUKS container, so that the hibernation image is encrypted at
+  # rest; this is also why this swap must never use randomEncryption. The
+  # size is 64 GiB, which is larger than the 54.7 GiB of usable RAM, so the
+  # hibernation image can never fail to fit. Note that a companion setting,
+  # resume_offset, is the physical offset of /swapfile on the ext4 file
+  # system, in 4 KiB pages, and it is therefore stable only as long as
+  # /swapfile is not deleted, resized, moved, or defragmented. The NixOS
+  # swap module recreates the file only when the declared size changes.
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 65536;
+    }
+  ];
+
+  # The resume device must be the *decrypted* mapper device (dm-0), never the
+  # LUKS partition itself: the hibernation image is written into the plaintext
+  # ext4, so it is encrypted at rest by dm-crypt. systemd's resume unit waits
+  # for this device unit (that is, for the passphrase) before reading the image.
+  boot.resumeDevice = "/dev/mapper/luks-8a7a6737-9972-442d-bd19-9f661eb2f6eb";
 
   # Configure how the system sleeps when the lid is closed;
   # specifically, it should sleep or suspend in all cases
@@ -489,7 +518,7 @@ in
       # terminal
       alacritty
       pkgs.gnome-terminal
-      ghostty
+      # ghostty
       kitty
       # cli
       abook
