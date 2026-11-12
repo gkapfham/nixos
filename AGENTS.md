@@ -12,6 +12,8 @@ This document provides essential context for working with this NixOS system conf
   pin is available as a commented alternative at `configuration.nix:37`)
 - **Window Manager**: i3 (X11, not Wayland)
 - **Display Manager**: LightDM with GTK greeter
+- **Boot Splash**: Plymouth `diameno` theme (two-step plugin); silent boot
+  with `Esc` to reveal kernel/systemd messages
 
 ## Configuration Structure
 
@@ -20,8 +22,10 @@ This document provides essential context for working with this NixOS system conf
 ├── configuration.nix          # Main system configuration
 ├── hardware-configuration.nix # Hardware-specific settings (auto-generated)
 ├── unstable.nix               # Unstable channel packages overlay
+├── plymouth/
+│   └── diameno.plymouth       # Plymouth theme definition
 └── media/
-    └── wallpaper.png          # LightDM background
+    └── wallpaper.png          # LightDM and Plymouth background
 ```
 
 ### Key Configuration Files

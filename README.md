@@ -53,6 +53,26 @@ Think about the following issues before adopting this NixOS configuration:
 
 - Uses `systemd-boot`
 - EFI variables enabled
+- Plymouth graphical boot/shutdown splash (`diameno` theme)
+- Silent boot: kernel and systemd messages are hidden; press `Esc` during
+  boot to see them
+
+### Graphical boot splash
+
+The `diameno` Plymouth theme lives in `plymouth/` and is built by the
+`plymouthTheme` derivation in `configuration.nix`.  It uses Plymouth's
+`two-step` plugin, which provides the progress bar and the LUKS password
+dialog.  The background is generated from `media/wallpaper.png`, the same
+default image that seeds the LightDM login screen, so the splash matches
+the login screen after a rebuild.  The NixOS mark is composited into the
+background, and the progress bar uses the same purple accent as Polybar
+and Quickshell (`#a569a5`).  The font is Maple Mono NF, matching the
+terminal and greeter.
+
+Plymouth runs before the encrypted root is unlocked, so it cannot read
+`/var/lib/wallpaper/current.png`; it can only use the image built into the
+initrd.  If you change the wallpaper permanently, update
+`media/wallpaper.png` and rebuild.
 
 ## 🐧 Linux Kernel
 

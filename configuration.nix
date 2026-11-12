@@ -10,6 +10,63 @@
 let
   lib = pkgs.lib;
 
+  # Graphical boot/shutdown theme.  Plymouth's two-step plugin supplies
+  # the progress bar and the LUKS password dialog; the background and
+  # spinner are generated from the same wallpaper that seeds LightDM and
+  # from Plymouth's own assets.  Rebuild after changing media/wallpaper.png.
+  plymouthTheme = pkgs.stdenvNoCC.mkDerivation {
+    pname = "diameno-plymouth-theme";
+    version = "1.0.0";
+
+    src = ./plymouth;
+
+    nativeBuildInputs = [ pkgs.imagemagick ];
+
+    installPhase = ''
+      runHook preInstall
+
+      themeDir=$out/share/plymouth/themes/diameno
+      mkdir -p "$themeDir"
+      cp -a ./. "$themeDir"/
+      chmod -R u+w "$themeDir"
+
+      # The two-step plugin loads these dialog assets from ImageDir.
+      # Reuse Plymouth's script theme and scale them for the 2.2K panel.
+      install -m 644 ${pkgs.plymouth}/share/plymouth/themes/script/{box,bullet,entry,lock}.png "$themeDir/"
+      mogrify -resize 200% "$themeDir"/{box,bullet,entry,lock}.png
+
+      # Reuse Plymouth's spinner frames at the theme's scale.
+      for frame in $(seq -f '%04g' 1 30); do
+        convert ${pkgs.plymouth}/share/plymouth/themes/spinner/throbber-$frame.png \
+          -resize 400% "$themeDir/throbber-$frame.png"
+      done
+
+      # Match the seeded LightDM wallpaper, dimmed for contrast.  The
+      # NixOS mark is composited in so it scales with the background on
+      # any panel; rebuild after changing media/wallpaper.png.
+      wallpaper=${./media/wallpaper.png}
+      wallpaperHeight=$(identify -format '%h' "$wallpaper")
+      logoY=$(( wallpaperHeight * 35 / 100 - 128 ))
+      convert "$wallpaper" \
+        -fill '#1c1c1c' -colorize 35% \
+        \( ${pkgs.nixos-icons}/share/icons/hicolor/256x256/apps/nix-snowflake-white.png \
+           -resize 256x256 \) \
+        -gravity North -geometry +0+$logoY -composite \
+        "$themeDir/background.png"
+
+      substituteInPlace "$themeDir/diameno.plymouth" \
+        --replace-fail '@THEME_DIR@' "$themeDir"
+
+      runHook postInstall
+    '';
+
+    meta = with lib; {
+      description = "Diameno Plymouth theme for the Framework 13";
+      license = licenses.gpl2Plus;
+      platforms = platforms.linux;
+    };
+  };
+
   # Per-machine secrets (gitignored via .gitignore). Holds values that
   # must not appear in the public repository, e.g. the real XMPP domain
   # for the ejabberd server.
@@ -72,6 +129,19 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Graphical boot and shutdown splash.  The kernel and systemd text is
+  # hidden by "quiet" below; press Esc during boot to see it again.
+  # Plymouth needs systemd in the initrd so the LUKS prompt is graphical
+  # and the splash starts before the encrypted root is unlocked.
+  boot.initrd.systemd.enable = true;
+  boot.plymouth = {
+    enable = true;
+    theme = "diameno";
+    themePackages = [ plymouthTheme ];
+    font = "${pkgs.maple-mono.NF}/share/fonts/truetype/MapleMono-NF-Regular.ttf";
+  };
+  boot.consoleLogLevel = 3;
+
   # Linux kernel: two options, with the second one being useful
   # when there are problems with the latest kernel and thus there
   # is a need to pin the installation to a specific version
@@ -109,6 +179,10 @@ in
     # (the swap code carries the extent map), but this header offset must be
     # recomputed if /swapfile is ever deleted, resized, or recreated.
     "resume_offset=84025344"
+    # Keep the boot text off the screen so the Plymouth splash is visible
+    "quiet"
+    "rd.udev.log_level=3"
+    "rd.systemd.show_status=auto"
     # 2: next — try ASPM performance policy before full off (allows L0s, avoids deep L1)
     # "pcie_aspm.policy=performance"
     # 3: next — global ASPM off (proven fallback from b8451e7, moderate battery cost ~0.5-2W)
