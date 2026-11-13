@@ -28,6 +28,7 @@ Think about the following issues before adopting this NixOS configuration:
 - [🌐 Networking](#-networking)
 - [🌍 Localization](#-localization)
 - [🖥️ X11 Windowing System](#%EF%B8%8F-x11-windowing-system)
+- [Moonlight and Sunshine](#moonlight-and-sunshine)
 - [🖱️ Input Devices](#-input-devices)
 - [🔊 Sound](#-sound)
 - [🔋 Power Management](#-power-management)
@@ -86,6 +87,26 @@ Think about the following issues before adopting this NixOS configuration:
 - LightDM with mini greeter (custom themed)
 - i3 window manager enabled
 - GNOME desktop environment disabled
+
+## Moonlight and Sunshine
+
+- Sunshine is enabled as a per-user service and starts with the i3 session
+- Captures a real X11 output with KMS/DRM and encodes with VAAPI on the AMD iGPU
+- Requires a USB-C dummy plug to create the tablet's second X11 output
+- Web UI: `https://localhost:47990`
+- `gkapfham` is in the `uinput` and `render` groups for virtual input and VAAPI
+
+Setup outline:
+
+1. Plug the dummy plug into a video-capable USB-C port. On the Framework 13
+   AMD 7040, use a rear USB4 port or the front-left port; the front-right port
+   has no DisplayPort Alt Mode.
+2. Find the new output with `xrandr`, then set its mode (add a modeline with
+   `cvt` if the dummy does not advertise the tablet's native resolution).
+3. Open the Sunshine web UI, set **Capture** to `kms`, **Encoder** to `vaapi`,
+   and select the dummy display.
+4. Install Moonlight on the tablet, add `diameno` (or the laptop's IP), and
+   pair with the PIN shown by Sunshine.
 
 ## 🖱️ Input Devices
 

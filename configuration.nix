@@ -418,6 +418,33 @@ in
     variant = "";
   };
 
+  # Enable Sunshine, the host side of Moonlight, so the Android tablet
+  # can act as a second X11 display. Sunshine captures a real X11
+  # output with KMS/DRM and encodes it on the AMD iGPU with VAAPI.
+  #
+  # The tablet must appear as a physical second output: plug a USB-C
+  # dummy plug into a video-capable port (on the Framework 13 AMD
+  # 7040, use a rear USB4 port or the front-left port; the front-right
+  # port has no DisplayPort Alt Mode). Configure the dummy output with
+  # xrandr, then in the Sunshine web UI at https://localhost:47990 set:
+  #
+  #   Capture = kms
+  #   Encoder = vaapi
+  #   Display = the dummy output (for example DP-1)
+  #
+  # Pair Moonlight on the tablet with the PIN shown by Sunshine.
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    openFirewall = true;
+    capSysAdmin = true; # required for KMS/DRM capture
+  };
+
+  # Sunshine needs /dev/uinput for its virtual keyboard and mouse.
+  # The Sunshine module enables this on current NixOS, but setting it
+  # explicitly also covers older channels where the module does not.
+  hardware.uinput.enable = true;
+
   # Install fonts; note that this ensures the Nerd fonts
   # with all of their affiliated symbols are applied
   # to the fonts that are installed from Nix packages
@@ -547,7 +574,9 @@ in
       "networkmanager"
       "wheel"
       "video"
+      "render" # VAAPI render node
       "input"
+      "uinput" # Sunshine virtual keyboard/mouse
     ];
     packages = with pkgs; [
       # terminal
@@ -750,6 +779,7 @@ in
     killall
     libgit2
     libnotify
+    libva-utils
     lightdm-mini-greeter
     litemdview
     microcode-amd
@@ -809,6 +839,7 @@ in
     xcursorthemes
     xev
     xinit
+    xorg.xrandr
     xrdb
     xwininfo
     zlib
