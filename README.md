@@ -111,6 +111,15 @@ Setup outline:
 6. Install Moonlight on the tablet, add `diameno` (or the laptop's IP), and
    pair with the PIN shown by Sunshine.
 
+Without a dummy plug yet:
+
+- You can test the stream by selecting the built-in display (`eDP-1`) as the
+  Sunshine display. This mirrors the laptop screen; it does not create a
+  separate desktop.
+- Any real monitor or TV connected through a USB-C→HDMI/DP adapter also works
+  as a stand-in for the dummy plug and gives you the full extended-display
+  workflow.
+
 ## 🖱️ Input Devices
 
 - Touchpad support enabled
