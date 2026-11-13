@@ -98,14 +98,17 @@ Think about the following issues before adopting this NixOS configuration:
 
 Setup outline:
 
-1. Plug the dummy plug into a video-capable USB-C port. On the Framework 13
+1. Rebuild and log out/back in so the new `render` and `uinput` group
+   memberships apply.
+2. Plug the dummy plug into a video-capable USB-C port. On the Framework 13
    AMD 7040, use a rear USB4 port or the front-left port; the front-right port
    has no DisplayPort Alt Mode.
-2. Find the new output with `xrandr`, then set its mode (add a modeline with
+3. Find the new output with `xrandr`, then set its mode (add a modeline with
    `cvt` if the dummy does not advertise the tablet's native resolution).
-3. Open the Sunshine web UI, set **Capture** to `kms`, **Encoder** to `vaapi`,
+4. Check that `vainfo` lists H.264 or HEVC encode entrypoints.
+5. Open the Sunshine web UI, set **Capture** to `kms`, **Encoder** to `vaapi`,
    and select the dummy display.
-4. Install Moonlight on the tablet, add `diameno` (or the laptop's IP), and
+6. Install Moonlight on the tablet, add `diameno` (or the laptop's IP), and
    pair with the PIN shown by Sunshine.
 
 ## 🖱️ Input Devices
